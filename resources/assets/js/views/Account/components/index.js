@@ -1,0 +1,4 @@
+export { default as AccountDetails } from './AccountDetails';
+export { default as AccountProfile } from './AccountProfile';
+export { default as AccountSettings } from './AccountSettings';
+export { default as Feedback } from './Feedback';

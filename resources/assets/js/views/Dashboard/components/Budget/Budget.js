@@ -66,7 +66,7 @@ const Budget = props => {
             >
               UNIQUE VISITORS
             </Typography>
-            <Typography variant="h3">9</Typography>
+            <Typography variant="h3">{props.uniquevisitors}</Typography>
           </Grid>
           <Grid item>
             <Avatar className={classes.avatar}>

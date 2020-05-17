@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {useCallback, useEffect,useState} from 'react';
 import { makeStyles } from '@material-ui/styles';
 import { Grid } from '@material-ui/core';
+
 
 import {
   Budget,
@@ -15,6 +16,8 @@ import {
   Country,
   AverageRating
 } from './components';
+import {useDispatch, useSelector,shallowEqual} from "react-redux";
+import {getReviewsInfo} from "../../store/action-creators/reviews";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -24,6 +27,38 @@ const useStyles = makeStyles(theme => ({
 
 const Dashboard = () => {
   const classes = useStyles();
+ const reviewsInfo = useSelector(state=>state.reviews.generalInfo,shallowEqual);
+
+
+
+  async function run() {
+
+
+    const products = await client.getProducts();
+    console.log(products);
+
+    const plans = await client.getProductPlans(123);
+    console.log(plans);
+  }
+
+  //run();
+
+
+
+ const dispatch = useDispatch();
+
+
+ const fetchReviews = useCallback(async ()=>{
+
+
+   return await dispatch(getReviewsInfo());
+
+ },[dispatch]);
+
+ useEffect(()=>{
+   fetchReviews();
+ },[fetchReviews]);
+
 
   return (
     <div className={classes.root}>
@@ -38,7 +73,7 @@ const Dashboard = () => {
           xl={4}
           xs={12}
         >
-          <TotalProfit />
+          <TotalProfit totalreviews={reviewsInfo.total_reviews ? reviewsInfo.total_reviews : 0} />
         </Grid>
 
         <Grid
@@ -48,7 +83,7 @@ const Dashboard = () => {
           xl={4}
           xs={12}
         >
-          <AverageRating />
+          <AverageRating avgrating={reviewsInfo.average_rating ? reviewsInfo.average_rating : 0} />
         </Grid>
         <Grid
           item
@@ -57,8 +92,14 @@ const Dashboard = () => {
           xl={4}
           xs={12}
         >
-          
-          <Ratings />
+
+          <Ratings
+            fivestar={reviewsInfo.total_five_star_users ? reviewsInfo.total_five_star_users : 0}
+            fourstar={reviewsInfo.total_four_star_users ? reviewsInfo.total_four_star_users : 0}
+            threestar={reviewsInfo.total_three_star_users ? reviewsInfo.total_three_star_users : 0}
+            twostar={reviewsInfo.total_two_star_users ? reviewsInfo.total_two_star_users : 0}
+            onestar={reviewsInfo.total_one_star_users ? reviewsInfo.total_one_star_users : 0}
+          />
         </Grid>
 
         <Grid
@@ -68,7 +109,7 @@ const Dashboard = () => {
           xl={4}
           xs={12}
         >
-          <Budget />
+          <Budget uniquevisitors={reviewsInfo.unique_visitors ? reviewsInfo.unique_visitors : 0} />
         </Grid>
         <Grid
           item
@@ -77,7 +118,7 @@ const Dashboard = () => {
           xl={4}
           xs={12}
         >
-          <TotalUsers />
+          <TotalUsers totalusers={reviewsInfo.total_users ? reviewsInfo.total_users : 0} />
         </Grid>
         <Grid
           item
@@ -86,7 +127,7 @@ const Dashboard = () => {
           xl={4}
           xs={12}
         >
-          <TasksProgress />
+          <TasksProgress newreviews={reviewsInfo.new_reviews ? reviewsInfo.new_reviews : 0}/>
         </Grid>
         <Grid
           item
@@ -95,7 +136,8 @@ const Dashboard = () => {
           xl={9}
           xs={12}
         >
-          <Country/>
+          <Country countries={reviewsInfo.locations ? reviewsInfo.locations : []}/>
+
         </Grid>
         <Grid
           item

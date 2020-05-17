@@ -17,7 +17,7 @@ import {
 
 // we display a list instead of chart
 //import { Doughnut } from 'react-chartjs-2';
-//import { data, options } from './chart';
+// import { data, options } from './chart';
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -69,15 +69,20 @@ const Country = props => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows.map((row) => (
-                <TableRow key={row.name}>
+              {props.countries.map((row) => (
+                <TableRow key={row.id}>
                   <TableCell component="th" scope="row">
-                    {row.name}
+                    {row.location}
                   </TableCell>
-                  <TableCell align="left">{row.calories}</TableCell>
+                  <TableCell align="left">
+                    2
+                   {/*2 represent no of users*/}
+
+                  </TableCell>
                   <TableCell align="left">
                     <div className={classes.root}>
-                      <LinearProgress variant="determinate" value={row.fat} color="secondary" style={{height: 20}}/>
+                      {/*value={row.fat}*/}
+                      <LinearProgress variant="determinate" value={2}  color="secondary" style={{height: 20}}/>
                     </div>
                   </TableCell>
                 </TableRow>

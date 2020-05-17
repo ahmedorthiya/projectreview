@@ -16,6 +16,7 @@ import {
   SignIn as SignInView,
   NotFound as NotFoundView,
   MyPlan as MyPlanView,
+  Logout as LogoutView,
 } from './views';
 
 import ForgotPasswordView from "./views/ForgotPassword";
@@ -30,17 +31,20 @@ const Routes = props => {
       <Redirect
         exact
         from="/"
+
         to="/dashboard"
       />
       <RouteWithLayout
         component={DashboardView}
         exact
+        authRequired
         layout={MainLayout}
         path="/dashboard"
       />
       <RouteWithLayout
         component={UserListView}
         exact
+        authRequired
         layout={MainLayout}
         path="/users"
       />
@@ -48,18 +52,21 @@ const Routes = props => {
 
         component={ProductListView}
         exact
+        authRequired
         layout={MainLayout}
         path="/products"
       />
       <RouteWithLayout
         component={MyPlanView}
         exact
+        authRequired
         layout={MainLayout}
         path="/myplan"
       />
       <RouteWithLayout
         component={TypographyView}
         exact
+        authRequired
         layout={MainLayout}
         path="/typography"
       />
@@ -72,15 +79,28 @@ const Routes = props => {
       <RouteWithLayout
         component={AccountView}
         exact
+        authRequired
         layout={MainLayout}
         path="/account"
       />
       <RouteWithLayout
         component={SettingsView}
         exact
+        authRequired
         layout={MainLayout}
         path="/settings"
       />
+
+      <RouteWithLayout
+        component={LogoutView}
+        exact
+        authRequired
+        layout={MainLayout}
+        path="/logout"
+      />
+
+
+
       <RouteWithLayout
         component={SignUpView}
         exact

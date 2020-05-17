@@ -62,9 +62,12 @@ const TotalUsers = props => {
               gutterBottom
               variant="body2"
             >
-              WIDGET CLICKS
+              Total Users
             </Typography>
-            <Typography variant="h3">22</Typography>
+            <Typography variant="h3">
+              {props.totalusers}
+
+            </Typography>
           </Grid>
           <Grid item>
             <Avatar className={classes.avatar}>

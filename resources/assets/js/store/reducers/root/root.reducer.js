@@ -9,12 +9,14 @@ import { sessionReducer } from '../session/session.reducer'
 import { requestReducer } from '../requests/requests.reducer'
 import { entitiesReducer } from '../entities/entities.reducer'
 import { flashMessagesReducer } from '../ui/flashMessages.reducer'
+import reviews from "../reviews/reviews";
 
 const rootReducer = combineReducers({
   entities: entitiesReducer,
   session: sessionReducer,
   flashMessages: flashMessagesReducer,
-  requests: requestReducer
+  requests: requestReducer,
+  reviews,
 })
 
 const globalReducer = createReducer(initialState, {

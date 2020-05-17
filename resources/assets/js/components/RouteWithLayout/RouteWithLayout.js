@@ -8,21 +8,30 @@ import SignIn from "../../views/SignIn";
 import {getCurrentUserInfo} from "../../store/action-creators/session";
 
 const RouteWithLayout = props => {
-  const { layout: Layout, component: Component, ...rest } = props;
+  const { layout: Layout, component: Component,authRequired, ...rest } = props;
 
  const dispatch = useDispatch();
  const [goToLoginPage,setLoginPage] = useState(false);
+ const [isLoading,setLoading] = useState(true);
+
 
  useEffect(()=>{
 
    const getCurrentUser = async ()=>{
 
+
        try {
 
          await dispatch(getCurrentUserInfo());
+
+
+         setLoading(false);
          setLoginPage(false);
        } catch (err) {
+         console.log(err);
            setLoginPage(true);
+           setLoading(false);
+
        }
 
 
@@ -32,10 +41,11 @@ const RouteWithLayout = props => {
  },[dispatch]);
 
 
- if(goToLoginPage){
-   if(props.path !== "/sign-in")
-   return <Redirect to={"/sign-in"}/>
- }
+   if (goToLoginPage && authRequired) {
+
+
+     return <Redirect to={"/sign-in"}/>
+  }
 
 
 
@@ -43,12 +53,27 @@ const RouteWithLayout = props => {
     <Route
       {...rest}
       render={matchProps => (
+        <div>
+          {
+          isLoading ? "Please wait...":(
         <Layout>
-          <Component {...matchProps} />
+          {
+            isLoading? "please wait ...":(
+              <Component {...matchProps} />
+            )
+          }
+
 
 
         </Layout>
+          )
+        }
+        </div>
+
+
       )}
+
+
     />
   );
 };
@@ -56,7 +81,8 @@ const RouteWithLayout = props => {
 RouteWithLayout.propTypes = {
   component: PropTypes.any.isRequired,
   layout: PropTypes.any.isRequired,
-  path: PropTypes.string
+  path: PropTypes.string,
+
 };
 
 

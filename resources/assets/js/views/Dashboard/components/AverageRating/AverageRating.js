@@ -65,7 +65,7 @@ const Budget = props => {
             >
               OVERALL AVERAGE RATING
             </Typography>
-            <Typography variant="h3">4.5</Typography>
+            <Typography variant="h3">{props.avgrating}</Typography>
           </Grid>
         </Grid>
         <div className={classes.difference}>

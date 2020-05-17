@@ -1,23 +1,7 @@
 import uuid from 'uuid/v1';
 
 export default [
-  {
-    id: uuid(),
-    name: 'Kfir Shapira',
-    review: 'Reputaton All Over is a brilliant solution for online reviews! Very simply to implement and use in my website, took 60 seconds to add the widget. I was looking all over for such a simple and affordable reviews aggregator. Highly recommend it!',
-    rating: '5.0',
-    source: 'facebook',
-    address: {
-      country: 'USA',
-      state: 'West Virginia',
-      city: 'Parkersburg',
-      street: '2849 Fulton Street'
-    },
-    email: 'ekaterina.tankova@devias.io',
-    phone: '304-428-3097',
-    avatarUrl: '/images/avatars/avatar_3.png',
-    createdAt: 1555016400000
-  },
+
   {
     id: uuid(),
     name: 'Lior Bachar',
@@ -51,7 +35,7 @@ export default [
     phone: '770-635-2682',
     avatarUrl: '/images/avatars/avatar_2.png',
     createdAt: 1555016400000
-  },  
+  },
   {
     id: uuid(),
     name: 'Alexa Richardson',
@@ -119,5 +103,5 @@ export default [
     avatarUrl: '/images/avatars/avatar_4.png',
     phone: '712-351-5711',
     createdAt: 1555016400000
-  }  
+  }
 ];

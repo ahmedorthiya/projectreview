@@ -24,9 +24,11 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function TransitionsModal({open, handleClose, handleOpen}) {
+export default function TransitionsModal({open, handleClose, handleOpen,reviewerId}) {
   const classes = useStyles();
- 
+
+  console.log("reviewerId = ",reviewerId);
+
 
   return (
     <Modal
@@ -87,7 +89,7 @@ export default function TransitionsModal({open, handleClose, handleOpen}) {
               />
 
               <Grid align="center">
-                    
+
                 <Typography variant="caption" align='center' display='block' gutterBottom>
                         This review is still in your inbox so the reply will only be emailed to the review,<br/>
                         For you reply to appear in your Review Tab, the review must first be published. <u>Publish now</u>

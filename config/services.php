@@ -37,9 +37,11 @@ return [
 
     'google' => [
         'GOOGLE_ACTIVE'=>true,
-        'client_id' => env('GOOGLE_CLIENT_ID'),
-        'client_secret' => env('GOOGLE_CLIENT_SECRET'),
-        'redirect' => 'https://127.0.0.1:8000/login/google/callback',
+        'client_id' => '810334204223-aee707cvel2eq470rp98q5okk9o84a7r.apps.googleusercontent.com',
+        'client_secret' => 'Nal6dR1ibWFTT-Q2x20dl6C',
+        'redirect' => 'http://localhost:8000/login/google/callback',
+        'proxy'=>true,
+
 
 
     ],
@@ -48,7 +50,7 @@ return [
         "FACEBOOK_ACTIVE"=>true,
         'client_id' => env('FACEBOOK_CLIENT_ID'),
         'client_secret' => env('FACEBOOK_CLIENT_SECRET'),
-        'redirect' => "https://127.0.0.1:8000/login/facebook/callback",
+        'redirect' => "https://localhost:8000/login/facebook/callback",
 
     ],
 

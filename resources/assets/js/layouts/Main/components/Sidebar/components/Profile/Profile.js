@@ -4,6 +4,7 @@ import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
 import { Avatar, Typography } from '@material-ui/core';
+import {useSelector} from "react-redux";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -25,10 +26,20 @@ const Profile = props => {
   const { className, ...rest } = props;
 
   const classes = useStyles();
+  const currentUser = useSelector(store=>store.session.currentUser);
+  const entity = useSelector(store=>store.entities);
+  let avatar = "";
+  let name="";
+ if(entity.users[currentUser]){
+   avatar  =entity.users[currentUser].avatar;
+   name  =entity.users[currentUser].first_name;
+
+ }
+
 
   const user = {
-    name: 'Ofer Shapira',
-    avatar: '/images/avatars/me-circle-cropped.png'
+    name: name ? name : '...',
+    avatar: avatar ? avatar:'/images/avatars/me-circle-cropped.png'
   };
 
   return (

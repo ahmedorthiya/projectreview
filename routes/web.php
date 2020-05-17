@@ -10,6 +10,26 @@ $spa = function () {
  */
 Route::get('reset-password/{token}', $spa)->name('password.reset');
 
+
+Route::group(['middleware' => 'web'], function () {
+
+    Route::get("/login/google/callback",'\App\Api\Controllers\SocialiteController@handleGoogleProviderCallback');
+    Route::get("/login/facebook/callback",'\App\Api\Controllers\SocialiteController@handleFacebookProviderCallback');
+
+
+});
+
+
+
+
+//Route::get("/check/{check}",function (){
+//    dd(request()->check);
+//});
+
+
+Route::get("/reviews-info/{review}","\App\Api\Controllers\ReviewsController@generalInfo");
+
+
 /**
  * Catchall route for the single page application
  */

@@ -13,7 +13,8 @@ import AssistantIcon from '@material-ui/icons/Assistant';
 import SystemUpdateAltIcon from '@material-ui/icons/SystemUpdateAlt';
 import ReceiptIcon from '@material-ui/icons/Receipt';
 import AccountBalanceWalletIcon from '@material-ui/icons/Face';
-
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import {Redirect} from "react-router-dom";
 import { Profile, SidebarNav, UpgradePlan } from './components';
 
 const useStyles = makeStyles(theme => ({
@@ -42,12 +43,15 @@ const useStyles = makeStyles(theme => ({
 const Sidebar = props => {
   const { open, variant, onClose, className, ...rest } = props;
 
+
+
+
   const classes = useStyles();
 
   const pages = [
     {
       title: 'Dashboard',
-      href: '/dashboard',
+      href: '/reviews',
       icon: <DashboardIcon />
     },
     {
@@ -69,6 +73,12 @@ const Sidebar = props => {
       title: 'Settings',
       href: '/account',
       icon: <SettingsIcon />
+    },
+    {
+      title: 'Logout',
+      href: '/logout',
+
+      icon: <ExitToAppIcon />
     }
   ];
 

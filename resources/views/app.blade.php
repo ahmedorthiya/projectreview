@@ -22,9 +22,7 @@
   </head>
 </head>
 <body class="bg-grey-lightest m-0 p-0 font-sans">
-  <div id="app">
-
-  </div>
+  <div id="app"></div>
 
   @env('prodution')
   <script charset="utf8" src="{{ mix('App.js') }}"></script>
@@ -35,5 +33,9 @@
   <script charset="utf8" src="{{ asset('/js/App.js') }}"></script>
   <script charset="utf8" src="{{ asset('/js/vendors~App.js') }}"></script>
   @endenv
+
+
+
+
 </body>
 </html>

@@ -14,7 +14,8 @@ import {
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 
-import { data, options } from './chart';
+import {  options } from './chart';
+import palette from "../../../../theme/palette";
 
 const useStyles = makeStyles(() => ({
   root: {},
@@ -32,12 +33,23 @@ const Ratings = props => {
 
   const classes = useStyles();
 
+  const data={
+    labels: ['5 Stars', '4 Stars', '3 Stars', '2 Stars', '1 Star'],
+    datasets: [
+      {
+        label: 'Reviews',
+        backgroundColor: palette.primary.main,
+        data: [props.fivestar, props.fourstar, props.threestar, props.twostar, props.onestar]
+      }
+    ]
+  };
+
   return (
     <Card
       {...rest}
       className={clsx(classes.root, className)}
     >
-      
+
       <CardContent>
         <div className={classes.chartContainer}>
           <HorizontalBar
@@ -46,7 +58,7 @@ const Ratings = props => {
           />
         </div>
       </CardContent>
-      
+
     </Card>
   );
 };

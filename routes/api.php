@@ -16,14 +16,23 @@ Route::group(['middleware' => ['auth:api']], function () {
 
 });
 
+
 Route::group(['middleware' => 'web'], function () {
+
     Route::get("/login/google",'\App\Api\Controllers\SocialiteController@googleLogin');
     Route::get("/login/facebook",'\App\Api\Controllers\SocialiteController@facebookLogin');
 
 });
 
-Route::get("/login/google/callback",'\App\Api\Controllers\SocialiteController@handleGoogleProviderCallback');
-Route::get("/login/facebook/callback",'\App\Api\Controllers\SocialiteController@handleFacebookProviderCallback');
+Route::group(['middleware' => ['encryptCookies']], function () {
+    Route::post('/login', '\App\Api\Controllers\SessionController@login');
+    Route::post('/signup', '\App\Api\Controllers\UserController@signup');
+
+
+
+
+});
+
 
 
 
@@ -38,9 +47,12 @@ Route::post('/reset-password', '\App\Api\Controllers\PasswordResetController@res
  * middleware.
  */
 
+//reviews api
 
-Route::group(['middleware' => ['encryptCookies']], function () {
-    Route::post('/login', '\App\Api\Controllers\SessionController@login');
-    Route::post('/signup', '\App\Api\Controllers\UserController@signup');
+Route::get("/reviews-info/{review}","\App\Api\Controllers\ReviewsController@generalInfo");
+Route::get("/reviewer-locations/{review}","\App\Api\Controllers\ReviewsController@locations");
+Route::get("/user-reviews/{review}","\App\Api\Controllers\ReviewsController@specificUserReviews");
 
-});
+
+
+

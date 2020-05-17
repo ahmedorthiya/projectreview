@@ -18,7 +18,8 @@
     "laravel/tinker": "~2.0",
     "league/fractal": "^0.18.0",
     "nesbot/carbon": "^2.9",
-    "prettus/l5-repository": "^2.6"
+    "prettus/l5-repository": "^2.6",
+    "scottybo/laravel-google-my-business": "^2.1"
   },
   "require-dev": {
     "codedungeon/phpunit-result-printer": "^0.26.2",

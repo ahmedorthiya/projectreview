@@ -15,5 +15,6 @@ export const requestActions = {
 
 export const userActions = {
   SET_CURRENT_USER_INFO: 'USER/SET_CURRENT_USER_INFO',
-  SET_AVATAR: 'USER/SET_AVATAR'
+  SET_AVATAR: 'USER/SET_AVATAR',
+
 }

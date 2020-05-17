@@ -14,6 +14,7 @@ import {
   //LinearProgress
 } from '@material-ui/core';
 
+
 const useStyles = makeStyles(theme => ({
   root: {},
   details: {
@@ -37,6 +38,8 @@ const useStyles = makeStyles(theme => ({
 const AccountProfile = props => {
   const { className, ...rest } = props;
 
+
+
   const classes = useStyles();
 
   const user = {
@@ -56,14 +59,14 @@ const AccountProfile = props => {
         <div className={classes.details}>
           <div>
             <Typography
-              component={'h2'} 
+              component={'h2'}
               gutterBottom
               variant="h2"
             >
               John Doe
             </Typography>
             <Typography
-              className={classes.locationText}              
+              className={classes.locationText}
               color="textSecondary"
               variant="body1"
             >
@@ -72,7 +75,7 @@ const AccountProfile = props => {
             <Typography
               className={classes.dateText}
               color="textSecondary"
-              component={'span'} 
+              component={'span'}
               variant="body1"
             >
               {moment().format('hh:mm A')} ({user.timezone})

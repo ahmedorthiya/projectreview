@@ -71,7 +71,7 @@ const TasksProgress = props => {
             >
               NEW REVIEWS
             </Typography>
-            <Typography variant="h3">11</Typography>
+            <Typography variant="h3">{props.newreviews}</Typography>
           </Grid>
           <Grid item>
             <Avatar className={classes.avatar}>

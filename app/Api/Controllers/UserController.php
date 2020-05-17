@@ -8,6 +8,7 @@ use App\Services\User\UpdateUserService;
 use App\Services\User\ChangePasswordService;
 use Illuminate\Validation\ValidationException;
 
+
 class UserController
 {
     private $signUpService;

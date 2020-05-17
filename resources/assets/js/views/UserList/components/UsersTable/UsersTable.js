@@ -45,7 +45,7 @@ const useStyles = makeStyles(theme => ({
   },
   button: {
     margin: theme.spacing(1),
-  },  
+  },
   btnColor: {
     backgroundColor: theme.palette.success.main
   }
@@ -60,13 +60,16 @@ const UsersTable = props => {
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [page, setPage] = useState(0);
   const [open, setOpen] = React.useState(false);
+  const [reviewerId,setReviewId] = React.useState(-1);
 
   const handleOpen = () => {
     setOpen(true);
+
   };
 
   const handleClose = () => {
     setOpen(false);
+    setReviewId(-1);
   };
 
   // in case we would like to add selection (checkbox)
@@ -123,6 +126,7 @@ const UsersTable = props => {
         open={open}
         handleOpen={handleOpen}
         handleClose={handleClose}
+        reviewerId={reviewerId}
       />
       <CardContent className={classes.content}>
         <PerfectScrollbar>
@@ -140,7 +144,7 @@ const UsersTable = props => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {users.slice(0, rowsPerPage).map(user => (
+                {users.map(user => (
                   <TableRow
                     className={classes.tableRow}
                     hover
@@ -175,13 +179,13 @@ const UsersTable = props => {
                       <Button
                         className={classes.button}
                         color="primary"
-                        onClick={handleOpen}
+                        onClick={()=>{handleOpen(user.id);setReviewId(user.id)}}
                         size="small"
                         startIcon={<CreateIcon />}
                         variant="contained"
                       >
                         Reply
-                      </Button>                    
+                      </Button>
 
                       <Button
                         className={classes.button}
@@ -191,7 +195,7 @@ const UsersTable = props => {
                         variant="contained"
                       >
                         Show
-                      </Button>                                        
+                      </Button>
                     </TableCell>
                   </TableRow>
                 ))}

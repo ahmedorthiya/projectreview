@@ -284,7 +284,7 @@ const SignIn = props => {
                   <Grid item>
                     <Button
                       color="secondary"
-                      href={"/api/login/facebook"}
+                      href={"http://localhost:8000/api/login/facebook"}
                       size="large"
                       variant="contained"
                     >

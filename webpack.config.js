@@ -46,8 +46,7 @@ const appSCSSLoader = {
                   ],
                   whitelistPatterns: [/[srm-]/],
                   extractors: [
-                    {
-                      extractor: TailwindExtractor,
+                    {extractor: TailwindExtractor,
                       extensions: ['html', 'js', 'php', 'jsx']
                     }
                   ]

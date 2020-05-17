@@ -1,0 +1,53 @@
+{
+  "user": {
+    "id": 1,
+    "name": "M Ahmed Mushtaq"
+  },
+  "overall_reviews_info":
+    {
+      "id": 1,
+      "total_reviews": 0,
+      "average_rating": 0,
+      "total_five_star_users": 0,
+      "total_four_star_users": 0,
+      "total_three_star_users": 0,
+      "total_two_star_users": 0,
+      "total_one_star_users": 0,
+      "unique_visitors": 340,
+      "total_users": 0,
+      "new_reviews": 0,
+      "user_id": 1
+
+    },
+
+  "reviews": [
+    {
+      "id": 1,
+      "name": "Kfir Shapira",
+      "rating": 2,
+      "source": "facebook",
+      "location": "USA",
+      "email": "ekaterina.tankova@devias.io",
+      "phone": "304-428-3097",
+      "avatarUrl": "/images/avatars/avatar_3.png",
+      "createdAt": 1555016400000,
+      "user_id": 1,
+      "review": "Unbelievable how easy it is to display all of your reviews on your own website using ReputationAllOver Widget! 5 stars tool!"
+
+    },
+    {
+      "id": 2,
+      "name": "Kfir Shapira",
+      "rating": 3,
+      "source": "google",
+      "location": "USA",
+      "email": "ekaterina.tankova@devias.io",
+      "phone": "304-428-3097",
+      "avatarUrl": "/images/avatars/avatar_3.png",
+      "createdAt": 1555016400000,
+      "user_id": 1,
+      "review": "This tool gives your prospects a visual sense about how much other users love your website, makes your site stand out from the crowd in organic search, and It`s highly recommended for anyone who has an online website for promoting his business. And the implementation of the widget was smooth and super simple"
+    }
+  ]
+
+}

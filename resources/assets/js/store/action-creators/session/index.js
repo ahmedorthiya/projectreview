@@ -1,1 +1,1 @@
-export { getCurrentUserInfo, logIn } from './session'
+export { getCurrentUserInfo, logIn,logout } from './session'

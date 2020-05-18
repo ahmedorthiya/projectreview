@@ -8,6 +8,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import NotificationsIcon from '@material-ui/icons/NotificationsOutlined';
 import InputIcon from '@material-ui/icons/Input';
 
+
 const useStyles = makeStyles(theme => ({
   root: {
     boxShadow: 'none'
@@ -17,7 +18,7 @@ const useStyles = makeStyles(theme => ({
   },
   signOutButton: {
     marginLeft: theme.spacing(1)
-    
+
   }
 }));
 
@@ -44,19 +45,20 @@ const Topbar = props => {
         </RouterLink>
         <div className={classes.flexGrow} />
         <Hidden mdDown>
-          
-          <Button 
-            color="primary" 
-            component="a" 
-            href="/myplan"           
+
+          <Button
+            color="primary"
+            component={RouterLink}
+            href="/myplan"
+            to={"/myplan"}
             size="small"
             variant="outlined"
           >
-            FREE Plan - Upgrade Now          
+            FREE Plan - Upgrade Now
           </Button>
 
-          <IconButton 
-            color="inherit" 
+          <IconButton
+            color="inherit"
             style={{ display: 'none' }}
           >
             <Badge

@@ -4,6 +4,8 @@ import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import {Grid, Typography, Divider, Avatar, Button} from '@material-ui/core';
+import {useSelector} from "react-redux";
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -36,10 +38,58 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function PlanUpgrade({open, handleClose, handleOpen}) {
+
+
+
+
+const  PlanUpgrade = (props)=> {
   const classes = useStyles();
+  const {open, handleClose, handleOpen} = props;
+  const currentUser = useSelector(store=>store.session.currentUser);
+  const entity = useSelector(store=>store.entities);
+  const {email,id}=entity.users[currentUser];
+  console.log("check user = ",entity.users[currentUser]);
+
+  const openPaddle = (productId)=>{
+    handleClose();
+    Paddle.Checkout.open({
+      product:productId,
+      successCallback:(data)=> handleSuccessfulPayment(data),
+      closeCallback:(data)=> handleUnsuccessfulPayment(data),
+      eventCallback:(evData)=>handleEventCallBack(data),
+      email,
+
+    })
+  }
+
+  const handleSuccessfulPayment = async (data)=>{
+    await axios.post("/api/subscriptions",{
+      ...data,
+      id,
+      completed:data.checkout.completed});
+
+
+
+  }
+  const handleUnsuccessfulPayment = async (data)=>{
+    console.log("check = ",{
+      ...data,
+      id,
+      completed:data.checkout.completed})
+
+
+    await axios.post("/api/subscriptions",{
+      ...data,
+      id,
+      completed:data.checkout.completed}).catch(err=>console.log(err));
+  }
+  const handleEventCallBack = (evData)=>{
+    console.log("ev Data Online = "+evData);
+  }
+
 
   return (
+    <React.Fragment>
     <Modal
       aria-describedby="transition-modal-description"
       aria-labelledby="transition-modal-title"
@@ -47,8 +97,9 @@ export default function PlanUpgrade({open, handleClose, handleOpen}) {
       BackdropProps={{
         timeout: 500,
       }}
-      className={classes.modal}
       closeAfterTransition
+      className={classes.modal}
+
       onClose={handleClose}
       open={open}
     >
@@ -80,13 +131,18 @@ export default function PlanUpgrade({open, handleClose, handleOpen}) {
                 <span className={classes.month}>/mo</span>
               </Typography>
               <br/>
-              <Grid align="center">
-                <Button color="secondary" variant="contained">
-                        UPGRADE
+
+              <Grid align="center" >
+
+
+                <Button color="secondary"  onClick={()=>openPaddle(593800)}  variant="contained">
+                  UPGRADE
                 </Button>
+
               </Grid>
+
             </Grid>
-                
+
             <Grid item xs={12} sm={4} align="center">
               <Avatar style={{width: 150, height: 150}} alt="Remy Sharp" src="https://s28.postimg.cc/ju5bnc3x9/plane.png" />
               <br/>
@@ -112,8 +168,8 @@ export default function PlanUpgrade({open, handleClose, handleOpen}) {
                 <span className={classes.month}>/mo</span>
               </Typography>
               <br/>
-              <Grid align="center">
-                <Button color="secondary" variant="contained">
+              <Grid align="center" >
+                <Button color="secondary" onClick={()=>openPaddle(593844)}  variant="contained">
                         UPGRADE
                 </Button>
               </Grid>
@@ -144,8 +200,8 @@ export default function PlanUpgrade({open, handleClose, handleOpen}) {
                 <span className={classes.month}>/mo</span>
               </Typography>
               <br/>
-              <Grid align="center">
-                <Button color="secondary" variant="contained">
+              <Grid align="center" >
+                <Button color="secondary" onClick={()=>openPaddle(593845)}   variant="contained">
                     UPGRADE
                 </Button>
               </Grid>
@@ -155,5 +211,10 @@ export default function PlanUpgrade({open, handleClose, handleOpen}) {
         </div>
       </Fade>
     </Modal>
+
+    </React.Fragment>
+
   );
 }
+
+export default PlanUpgrade;

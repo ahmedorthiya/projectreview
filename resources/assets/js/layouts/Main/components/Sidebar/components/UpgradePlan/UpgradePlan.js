@@ -3,6 +3,8 @@ import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
 import { Typography, Button, colors } from '@material-ui/core';
+import {Link} from "react-router-dom";
+import {useSelector} from "react-redux";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -30,6 +32,7 @@ const useStyles = makeStyles(theme => ({
 
 const UpgradePlan = props => {
   const { className, ...rest } = props;
+
 
   const classes = useStyles();
 
@@ -62,8 +65,9 @@ const UpgradePlan = props => {
       <div className={classes.actions}>
         <Button
           color="primary"
-          component="a"
+          component={Link}
           href="/myplan"
+          to={"/myplan"}
           variant="contained"
         >
           Upgrade

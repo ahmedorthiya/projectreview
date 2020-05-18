@@ -1,5 +1,7 @@
 <?php
 
+use ProtoneMedia\LaravelPaddle\Paddle;
+
 $spa = function () {
     return view('app');
 };
@@ -29,6 +31,28 @@ Route::group(['middleware' => 'web'], function () {
 
 Route::get("/reviews-info/{review}","\App\Api\Controllers\ReviewsController@generalInfo");
 
+Route::get("/test-payment",function(){
+    // Fluent:
+    $paddleResponse = Paddle::product()
+        ->generatePayLink()
+        ->productId(593800)
+        ->customerEmail("shine@gmail.com")
+        ->passthrough(['team_id' => "123"])
+        ->send();
+
+// Array with payload:
+    $payload = [
+        'product_id' => 593800,
+        'customer_email' => "shine@gmail.com",
+        'passthrough' => ['team_id' => 123],
+    ];
+
+    $paddleResponse = Paddle::product()
+        ->generatePayLink($payload)
+        ->send();
+
+    return Redirect::to($paddleResponse['url']);
+});
 
 /**
  * Catchall route for the single page application

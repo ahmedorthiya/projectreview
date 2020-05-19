@@ -45,59 +45,59 @@ export default function TransitionsModal({open, handleClose, handleOpen,reviewer
     >
       <Fade in={open}>
         <div className={classes.paper}>
-          <Grid container justify="center" alignItems="center">
+          <Grid container justify="center" direction={"column"} alignItems="center">
             <Grid item xs={12} >
-              <Typography variant="h4" align="center">
-                        Reply to Reviews
+              <Typography variant="h2" align="center">
+                       User Data
               </Typography>
             </Grid>
 
-            <Grid item sm={4}>
-              <Rating name="read-only" value={5} readOnly />
-            </Grid>
-            <Grid item sm={4} align="center">
-              <Typography variant="body2">
-                        Submitted by 12 November
-              </Typography>
-            </Grid>
-            <Grid item sm={4} align="center">
-              <Typography variant="body2">
-                        Review Source
-              </Typography>
-            </Grid>
+
+
+
 
             <Grid item xs={12} align="left">
-              <Typography variant="subtitle2" gutterBottom>
-                        Review Source
-              </Typography>
-              <Divider variant="fullWidth" component="hr" className={classes.line} />
-              <Typography variant="subtitle2" gutterBottom>
-                        To: Google
-              </Typography>
-              <Typography variant="subtitle2" gutterBottom>
-                        Your Reply
+              <Typography   gutterBottom>
+                       Profile Info
               </Typography>
 
-              <TextField
-                fullWidth
-                id="outlined-multiline-static"
-                margin="normal"
-                multiline
-                placeholder="Enter your reply here"
-                rows={4}
-                variant="outlined"
-              />
+              <Divider variant="fullWidth" component="hr" className={classes.line} />
+              <TextField fullWidth label={"Name"}  gutterBottom/>
+
+
+              <TextField  fullWidth label={"Name"}   gutterBottom />
+              <br/>
+
+
+              <Typography    gutterBottom >Subscription: </Typography>
+
+
+
+
+
+
+
+
+              {/*<TextField*/}
+              {/*  fullWidth*/}
+              {/*  id="outlined-multiline-static"*/}
+              {/*  margin="normal"*/}
+              {/*  multiline*/}
+              {/*  placeholder="Enter your reply here"*/}
+              {/*  rows={4}*/}
+              {/*  variant="outlined"*/}
+              {/*/>*/}
 
               <Grid align="center">
 
-                <Typography variant="caption" align='center' display='block' gutterBottom>
-                        This review is still in your inbox so the reply will only be emailed to the review,<br/>
-                        For you reply to appear in your Review Tab, the review must first be published. <u>Publish now</u>
-                </Typography>
+
 
                 <Button color="secondary" variant="contained">
-                        Reply
+                        Update
                 </Button>
+                <Button variant={"contained"} color="primary" style={{marginLeft:"5px"}}>Make admin</Button>
+
+
               </Grid>
 
             </Grid>

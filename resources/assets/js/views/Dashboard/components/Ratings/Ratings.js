@@ -3,16 +3,14 @@ import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { Bar, HorizontalBar } from 'react-chartjs-2';
 import { makeStyles } from '@material-ui/styles';
+
 import {
   Card,
-  CardHeader,
+
   CardContent,
-  CardActions,
-  Divider,
-  Button
+
 } from '@material-ui/core';
-import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
-import ArrowRightIcon from '@material-ui/icons/ArrowRight';
+
 
 import {  options } from './chart';
 import palette from "../../../../theme/palette";

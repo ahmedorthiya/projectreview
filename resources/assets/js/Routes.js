@@ -16,7 +16,7 @@ import {
   SignIn as SignInView,
   NotFound as NotFoundView,
   MyPlan as MyPlanView,
-  Logout as LogoutView,
+  Logout as LogoutView, AdminPanel, WebUsers, Coupons, SubscribedUsers,
 } from './views';
 
 import ForgotPasswordView from "./views/ForgotPassword";
@@ -92,12 +92,46 @@ const Routes = props => {
       />
 
       <RouteWithLayout
-        component={LogoutView}
+        component={AdminPanel}
         exact
         authRequired
+        admin
         layout={MainLayout}
-        path="/logout"
+        path="/admin-panel"
       />
+
+
+
+      <RouteWithLayout
+        component={WebUsers}
+        exact
+        authRequired
+        admin
+        layout={MainLayout}
+        path="/admin-panel/users"
+      />
+
+      <RouteWithLayout
+        component={Coupons}
+        exact
+        authRequired
+        admin
+        layout={MainLayout}
+        path="/admin-panel/coupons"
+      />
+
+      <RouteWithLayout
+        component={SubscribedUsers}
+        exact
+        authRequired
+        admin
+        layout={MainLayout}
+        path="/admin-panel/subscribed-users"
+      />
+
+
+
+
 
 
 
@@ -126,6 +160,15 @@ const Routes = props => {
         layout={MinimalLayout}
         path="/not-found"
       />
+
+      <RouteWithLayout
+        component={LogoutView}
+        exact
+        authRequired
+        layout={MinimalLayout}
+        path="/logout"
+      />
+
       <Redirect to="/not-found" />
     </Switch>
   );

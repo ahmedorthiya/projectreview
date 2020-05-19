@@ -10,3 +10,7 @@ export { default as Typography } from './Typography';
 export { default as UserList } from './UserList';
 export { default as MyPlan } from './MyPlan';
 export { default as Logout } from './Logout';
+export {default as AdminPanel} from "./adminPanel";
+export {default as WebUsers} from "./WebUsers";
+export {default as Coupons} from "./coupons";
+export {default as SubscribedUsers} from "./subscribed-users";

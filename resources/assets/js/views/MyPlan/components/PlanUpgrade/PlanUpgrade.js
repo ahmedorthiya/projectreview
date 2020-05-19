@@ -48,7 +48,7 @@ const  PlanUpgrade = (props)=> {
   const currentUser = useSelector(store=>store.session.currentUser);
   const entity = useSelector(store=>store.entities);
   const {email,id}=entity.users[currentUser];
-  console.log("check user = ",entity.users[currentUser]);
+
 
   const openPaddle = (productId)=>{
     handleClose();

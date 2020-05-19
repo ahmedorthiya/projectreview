@@ -49,15 +49,9 @@ const Dashboard = () => {
    fetchReviews();
  },[fetchReviews]);
 
- const checkout = ()=>{
 
 
 
- }
-
- const handleSuccessfulPayment = (data)=>{
-   console.log("data is = ",data);
- }
 
   return (
     <div className={classes.root}>
@@ -73,9 +67,7 @@ const Dashboard = () => {
           xs={12}
         >
 
-          <button onClick={checkout}>Checkout</button>
 
-          {/*<a href="https://buy.paddle.com/product/593800" className="paddle_button" data-product="593800">Buy Now!</a>*/}
 
           <TotalProfit totalreviews={reviewsInfo.total_reviews ? reviewsInfo.total_reviews : 0} />
         </Grid>

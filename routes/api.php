@@ -53,11 +53,14 @@ Route::post('/reset-password', '\App\Api\Controllers\PasswordResetController@res
 
 
 
+
 Route::group(['middleware' => ['auth:api']],function (){
     Route::get("/reviews-info/{review}","\App\Api\Controllers\ReviewsController@generalInfo");
     Route::get("/reviewer-locations/{review}","\App\Api\Controllers\ReviewsController@locations");
     Route::get("/user-reviews/{review}","\App\Api\Controllers\ReviewsController@specificUserReviews");
     Route::post("/subscriptions","\App\Api\Controllers\SubscriptionController@newSubscriptionRecord");
+    Route::get("/total-users","\App\Api\Controllers\UserController@totalUsers");
+
 
 });
 

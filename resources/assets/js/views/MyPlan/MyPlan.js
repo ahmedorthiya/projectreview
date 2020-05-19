@@ -22,7 +22,7 @@ const MyPlan = () => {
   const handleOpen = () => {
     setOpen(true);
   };
-  
+
   const handleClose = () => {
     setOpen(false);
   };
@@ -46,18 +46,20 @@ const MyPlan = () => {
         >
             Current Plan
         </Typography>
-        <PlanDetails 
+        <PlanDetails
           handleOpen={handleOpen}
         />
         <MoreImpressions
           handleOpen={handleOpen}
         />
-        <Typography 
-          gutterBottom 
-          style={{margin: 20}} 
+        <Typography
+          gutterBottom
+          style={{margin: 20}}
           variant="h3"
         >
-            Your Invoices
+
+
+
         </Typography>
         <Billing />
       </Grid>

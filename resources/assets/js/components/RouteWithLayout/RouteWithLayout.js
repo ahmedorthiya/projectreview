@@ -8,11 +8,17 @@ import SignIn from "../../views/SignIn";
 import {getCurrentUserInfo} from "../../store/action-creators/session";
 
 const RouteWithLayout = props => {
-  const { layout: Layout, component: Component,authRequired, ...rest } = props;
+  const { layout: Layout, component: Component,authRequired,admin, ...rest } = props;
 
  const dispatch = useDispatch();
- const [goToLoginPage,setLoginPage] = useState(false);
+
  const [isLoading,setLoading] = useState(true);
+ const [currentUser,setCurrentUser] = useState({
+   login:false,
+   data:"",
+ });
+
+
 
 
  useEffect(()=>{
@@ -22,15 +28,29 @@ const RouteWithLayout = props => {
 
        try {
 
-         await dispatch(getCurrentUserInfo());
+        const res=  await dispatch(getCurrentUserInfo());
 
 
          setLoading(false);
-         setLoginPage(false);
+
+         setCurrentUser(data=>(
+           {
+             login:false,
+             data:res
+           }
+         ));
        } catch (err) {
          console.log(err);
-           setLoginPage(true);
-           setLoading(false);
+
+
+
+           setCurrentUser(data=>(
+             {
+               login:true,
+               data:""
+             }
+           ));
+         setLoading(false);
 
        }
 
@@ -41,11 +61,21 @@ const RouteWithLayout = props => {
  },[dispatch]);
 
 
-   if (goToLoginPage && authRequired) {
 
 
-     return <Redirect to={"/sign-in"}/>
-  }
+
+   if (currentUser.login && authRequired) {
+        // required login
+        return <Redirect to={"/sign-in"}/>
+  }else if(!currentUser.login && authRequired && admin && currentUser.data.account_type === 'user'){
+   //  already login  and required admin rights so when
+     //  user try to visit admin route then
+
+     if(currentUser.login)
+       return <Redirect to={"/sign-in"}/>
+     else return <Redirect to={"/dashboard"}/>
+
+   }
 
 
 

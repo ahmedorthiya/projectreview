@@ -16,6 +16,13 @@ import AccountBalanceWalletIcon from '@material-ui/icons/Face';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import {Redirect} from "react-router-dom";
 import { Profile, SidebarNav, UpgradePlan } from './components';
+import PeopleIcon from '@material-ui/icons/People';
+import CreditCardIcon from '@material-ui/icons/CreditCard';
+import {useSelector} from "react-redux";
+import {withRouter} from "react-router-dom";
+import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
+import ListIcon from '@material-ui/icons/List';
+import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 
 const useStyles = makeStyles(theme => ({
   drawer: {
@@ -42,11 +49,47 @@ const useStyles = makeStyles(theme => ({
 
 const Sidebar = props => {
   const { open, variant, onClose, className, ...rest } = props;
+  const userInfo = useSelector(state=>state.entities.users[state.session.currentUser]);
 
+  const showAdminPages = props.location.pathname.includes("admin-panel");
 
 
 
   const classes = useStyles();
+
+  const adminPages = [
+    {
+      title: 'Admin',
+      href: '/admin-panel',
+      icon: <SupervisorAccountIcon />
+    },
+    {
+      title: 'Users',
+      href: '/admin-panel/users',
+      icon: <ListIcon />
+    },
+    {
+      title: 'Coupons',
+      href: '/admin-panel/coupons',
+      icon: <CreditCardIcon />
+    },
+    {
+      title: 'Subscribed Users',
+      href: '/admin-panel/subscribed-users',
+      icon: <AttachMoneyIcon />
+    },
+    {
+      title: 'Go To Dashboard',
+      href: '/dashboard',
+      icon: <DashboardIcon />
+    },
+    {
+      title: 'Logout',
+      href: '/logout',
+
+      icon: <ExitToAppIcon />
+    }
+  ];
 
   const pages = [
     {
@@ -82,6 +125,14 @@ const Sidebar = props => {
     }
   ];
 
+  if(userInfo.account_type === 'admin') {
+    pages.push( {
+        title: 'Go To Admin Panel',
+        href: '/admin-panel',
+        icon: <SupervisorAccountIcon />
+    })
+  }
+
   return (
     <Drawer
       anchor="left"
@@ -96,12 +147,19 @@ const Sidebar = props => {
       >
         <Profile />
         <Divider className={classes.divider} />
+
         <SidebarNav
           className={classes.nav}
-          pages={pages}
+          pages={showAdminPages ? adminPages : pages}
         />
+
         <br/>
-        <UpgradePlan />
+        {
+          !showAdminPages &&  <UpgradePlan />
+        }
+
+
+
       </div>
     </Drawer>
   );
@@ -114,4 +172,4 @@ Sidebar.propTypes = {
   variant: PropTypes.string.isRequired
 };
 
-export default Sidebar;
+export default withRouter(Sidebar);

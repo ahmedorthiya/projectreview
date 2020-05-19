@@ -2,6 +2,7 @@
 
 namespace App\Api\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Services\User\SignUpService;
 use App\Services\User\UpdateUserService;
@@ -55,5 +56,9 @@ class UserController
         ]);
 
         return $this->changePasswordService->changePasswordResponse($data);
+    }
+
+    public function totalUsers(){
+        return User::count();
     }
 }

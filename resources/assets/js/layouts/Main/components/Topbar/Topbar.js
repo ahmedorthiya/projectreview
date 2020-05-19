@@ -7,6 +7,7 @@ import { AppBar, Toolbar, Badge, Hidden, IconButton, Button } from '@material-ui
 import MenuIcon from '@material-ui/icons/Menu';
 import NotificationsIcon from '@material-ui/icons/NotificationsOutlined';
 import InputIcon from '@material-ui/icons/Input';
+import {useSelector} from "react-redux";
 
 
 const useStyles = makeStyles(theme => ({
@@ -29,6 +30,11 @@ const Topbar = props => {
 
   const [notifications] = useState([]);
 
+
+  const userInfo = useSelector(state=>state.entities.users[state.session.currentUser]);
+
+
+
   return (
     <AppBar
       {...rest}
@@ -46,16 +52,22 @@ const Topbar = props => {
         <div className={classes.flexGrow} />
         <Hidden mdDown>
 
-          <Button
-            color="primary"
-            component={RouterLink}
-            href="/myplan"
-            to={"/myplan"}
-            size="small"
-            variant="outlined"
-          >
-            FREE Plan - Upgrade Now
-          </Button>
+          {
+            userInfo.account_type === 'user' ? (
+              <Button
+                color="primary"
+                component={RouterLink}
+                href="/myplan"
+                to={"/myplan"}
+                size="small"
+                variant="outlined"
+              >
+                FREE Plan - Upgrade Now
+              </Button>
+            ):""
+          }
+
+
 
           <IconButton
             color="inherit"
@@ -70,13 +82,13 @@ const Topbar = props => {
             </Badge>
           </IconButton>
 
-          <IconButton
-            className={classes.signOutButton}
-            color="inherit"
-            title="Log out"
-          >
-            <InputIcon />
-          </IconButton>
+          {/*<IconButton*/}
+          {/*  className={classes.signOutButton}*/}
+          {/*  color="inherit"*/}
+          {/*  title="Log out"*/}
+          {/*>*/}
+          {/*  <InputIcon />*/}
+          {/*</IconButton>*/}
 
         </Hidden>
         <Hidden lgUp>

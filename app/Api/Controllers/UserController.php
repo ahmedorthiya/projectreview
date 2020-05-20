@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Services\User\SignUpService;
 use App\Services\User\UpdateUserService;
 use App\Services\User\ChangePasswordService;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 
 
@@ -59,6 +60,19 @@ class UserController
     }
 
     public function totalUsers(){
-        return User::count();
+        return User::all();
+    }
+
+    public function makeAdmin(){
+
+       $user =  User::find(request()->userId);
+       $authUser = Auth::user();
+       if($authUser->account_type !== 'admin'){
+           return response("Please login as a administration rights ",403);
+       }
+
+       $user->account_type = 'admin';
+       $user->save();
+       return response("Make Admin Successfully",200);
     }
 }

@@ -29,45 +29,48 @@ const AdminPanel = () => {
 
   const dispatch = useDispatch();
 
-  useEffect(()=>{
-    const totalUsers = async ()=>{
-      const res = await axios.get("/api/total-users");
-       setData(data=>({
-         ...data,
-         totalUsers:res.data
-       }))
-    }
+  const loadData = useCallback(async ()=>{
 
-    const subscription = async ()=>{
-      const res = await axios.post("https://vendors.paddle.com/api/2.0/subscription/users",{
-        vendor_id:114252,
-        vendor_auth_code:"f7f3fdcdad4a6a174318501b842687fa5447c43c2efd7c5b01",
+    const totalUserRes = await axios.get("/api/total-users");
 
-        state:'active',
+
+
+    const res = await axios.post("https://vendors.paddle.com/api/2.0/subscription/users",{
+      vendor_id:114252,
+      vendor_auth_code:"f7f3fdcdad4a6a174318501b842687fa5447c43c2efd7c5b01",
+
+      state:'active',
+    })
+
+    let totalEarning = 0;
+    if(res.data.response.length > 0){
+      //  mean subscriber found
+
+      res.data.response.map(row=>{
+        totalEarning += row.last_payment.amount;
       })
 
-
-      if(res.data.response.length > 0){
-      //  mean subscriber found
-        let totalEarning = 0;
-        res.data.response.map(row=>{
-          totalEarning += row.last_payment.amount;
-        })
-
-        setData(data=>({
-          ...data,
-          totalEarning
-        }))
-
-      }
-
-
     }
 
-    subscription();
+    setData(data=>({
+      ...data,
+      totalUsers: totalUserRes.data.length,
+      totalEarning,
 
-    totalUsers();
-  },[dispatch])
+
+    }))
+
+
+
+
+  },[dispatch]);
+
+  useEffect(()=>{
+
+     loadData();
+
+
+  },[loadData])
 
 
   const fetchReviews = useCallback(async ()=>{

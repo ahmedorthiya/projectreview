@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('avatar')->default("uploads/profiles/def.png");
             $table->string("account_type")->default("user");
+            $table->string("subscription_id")->default(null);
             $table->rememberToken();
             $table->timestamps();
         });

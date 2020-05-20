@@ -35,6 +35,8 @@ Route::get("/user",function(){
     return \App\Models\User::count();
 });
 
+
+
 /**
  * Catchall route for the single page application
  */

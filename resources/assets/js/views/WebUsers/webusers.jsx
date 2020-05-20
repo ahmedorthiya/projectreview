@@ -10,6 +10,7 @@ import Modal from "./Modal";
 import {Card} from "@material-ui/core";
 import clsx from "clsx";
 import DeleteIcon from '@material-ui/icons/Delete';
+import axios from "axios";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -29,16 +30,50 @@ const WebUsers = props => {
   const dispatch = useDispatch();
   const {className,...rest} = props;
 
+  const [userInfos,setList] = useState([]);
+  const [selectedUser,setSelectedUser] = useState('');
+
+
+  useEffect(()=>{
+    const allUsers = async ()=>{
+      const res = await axios.get("/api/total-users");
+      const list = [];
+
+      console.log("res data is = ",res.data);
+      res.data.map(row=>{
+        list.push({
+          name:row.first_name,
+          email:row.email,
+          'edit':<EditIcon onClick={()=>handleOpen(row)} style={{cursor:'pointer'}}/>
 
 
 
-  const handleOpen = () => {
+        })
+      })
+      setList(list);
+
+
+    }
+
+    allUsers();
+
+
+
+  },[])
+
+
+
+  const handleOpen = (userInfo) => {
+    setSelectedUser(userInfo);
     setOpen(true);
+
 
   };
 
   const handleClose = () => {
+    setSelectedUser('');
     setOpen(false);
+
 
   };
 
@@ -53,20 +88,13 @@ const WebUsers = props => {
       open={open}
       handleOpen={handleOpen}
       handleClose={handleClose}
-      reviewerId={1}
+      userInfo={selectedUser}
     />
 
     <div >
       <UsersToolbar />
       <br/>
-      <CustomTable color={'white'} headings={['Name','Email','Edit','Delete']} data={[
-        {'name':'M Ahmed Mushtaq','email':'test@gmail.com',
-          'edit':<EditIcon onClick={handleOpen} style={{cursor:'pointer'}}/>
-          ,'delete':<DeleteIcon onClick={handleOpen} style={{cursor:'pointer'}}
-          />
-          },
-
-      ]}/>
+      <CustomTable color={'white'} headings={['Name','Email','Edit']} data={userInfos}/>
     </div>
     </div>
   );

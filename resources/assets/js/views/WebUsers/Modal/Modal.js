@@ -1,10 +1,10 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import {Grid, Typography, Divider, TextField, Button} from '@material-ui/core';
-import Rating from '@material-ui/lab/Rating';
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -24,9 +24,15 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function TransitionsModal({open, handleClose, handleOpen,reviewerId}) {
+export default function TransitionsModal({open, handleClose,userInfo}) {
   const classes = useStyles();
 
+  const makeAdmin = async ()=>{
+   const res = await axios.patch(`/api/make-admin/${userInfo.id}`);
+
+   handleClose();
+
+  }
 
 
 
@@ -56,20 +62,23 @@ export default function TransitionsModal({open, handleClose, handleOpen,reviewer
 
 
 
-            <Grid item xs={12} align="left">
+            <Grid item xs={12} align="center">
               <Typography   gutterBottom>
                        Profile Info
               </Typography>
 
               <Divider variant="fullWidth" component="hr" className={classes.line} />
-              <TextField fullWidth label={"Name"}  gutterBottom/>
+              <Typography fullWidth   gutterBottom>
+                {userInfo.first_name + userInfo.last_name}
+              </Typography>
 
 
-              <TextField  fullWidth label={"Name"}   gutterBottom />
+              <Typography fullWidth   gutterBottom>
+                {userInfo.email}
+              </Typography>
               <br/>
 
 
-              <Typography    gutterBottom >Subscription: </Typography>
 
 
 
@@ -78,24 +87,22 @@ export default function TransitionsModal({open, handleClose, handleOpen,reviewer
 
 
 
-              {/*<TextField*/}
-              {/*  fullWidth*/}
-              {/*  id="outlined-multiline-static"*/}
-              {/*  margin="normal"*/}
-              {/*  multiline*/}
-              {/*  placeholder="Enter your reply here"*/}
-              {/*  rows={4}*/}
-              {/*  variant="outlined"*/}
-              {/*/>*/}
+
+
 
               <Grid align="center">
 
 
 
-                <Button color="secondary" variant="contained">
-                        Update
-                </Button>
-                <Button variant={"contained"} color="primary" style={{marginLeft:"5px"}}>Make admin</Button>
+
+                {
+                  userInfo.account_type === 'user' ? (
+                    <Button onClick={makeAdmin} variant={"contained"} color="primary" style={{marginLeft:"5px"}}>
+                      Make admin
+                    </Button>
+                  ): ""
+                }
+
 
 
               </Grid>

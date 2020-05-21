@@ -7,6 +7,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 
 import { ProductsToolbar, ProductCard, InstallWidget, WidgetSettings } from './components';
 import mockData from './data';
+import Modal from "./components/Modal";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -32,6 +33,7 @@ const useStyles = makeStyles(theme => ({
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
+
   return (
     <div
       aria-labelledby={`full-width-tab-${index}`}
@@ -40,8 +42,11 @@ function TabPanel(props) {
       role="tabpanel"
       {...other}
     >
+
+
+
       {value === index && (
-        <Box p={3}>
+        <Box p={3} >
           <Typography component={'div'}>{children}</Typography>
         </Box>
       )}
@@ -62,6 +67,21 @@ const ProductList = () => {
   const [value, setValue] = React.useState(0);
   const theme = useTheme();
 
+  const [open,setOpen] = useState(false);
+  const [product,setProduct] = useState("");
+  const openModel = (slug)=>{
+    setProductSlug(slug);
+  }
+
+  const openModal = (product)=>{
+    setProduct(product);
+    setOpen(true);
+  }
+  const handleClose = ()=>{
+    setProduct('');
+    setOpen(false);
+  }
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -75,6 +95,12 @@ const ProductList = () => {
   return (
     <div className={classes.root}>
       <Paper className={classes.spacer}>
+        <Modal
+          handleClose={handleClose}
+          open={open}
+          product={product}
+        />
+
         <Tabs
           aria-label="full width tabs example"
           className={classes.tabColor}
@@ -108,8 +134,12 @@ const ProductList = () => {
                   lg={4}
                   md={6}
                   xs={12}
+
                 >
-                  <ProductCard product={product} />
+
+
+
+                  <ProductCard openModal={openModal} product={product} />
                 </Grid>
               ))}
             </Grid>
@@ -131,10 +161,10 @@ const ProductList = () => {
           <InstallWidget />
         </TabPanel>
       </SwipeableViews>
-      
+
       {/* <InstallWidget />
       <ProductsToolbar />
-      
+
       <div className={classes.content}>
         <Grid
           container

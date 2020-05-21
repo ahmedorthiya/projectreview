@@ -19,9 +19,7 @@ const useStyles = makeStyles((theme) => ({
     width: '90%',
     maxWidth: 900
   },
-  line: {
-    margin: theme.spacing(2, 0, 2)
-  }
+
 }));
 
 export default function TransitionsModal({open, handleClose, handleOpen,reviewerId}) {

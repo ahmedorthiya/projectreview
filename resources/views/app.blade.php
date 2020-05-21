@@ -40,6 +40,7 @@
 
 
 
+  <script type="text/javascript" src="http://127.0.0.1:8000/widget.js"></script>
 
 
 

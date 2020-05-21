@@ -13,13 +13,19 @@ $spa = function () {
 Route::get('reset-password/{token}', $spa)->name('password.reset');
 
 
-Route::group(['middleware' => 'web'], function () {
+//Route::group(['middleware' => 'web'], function () {
+//
+//
+//
+//});
 
-    Route::get("/login/google/callback",'\App\Api\Controllers\SocialiteController@handleGoogleProviderCallback');
-    Route::get("/login/facebook/callback",'\App\Api\Controllers\SocialiteController@handleFacebookProviderCallback');
+Route::get("/widget.js",'\App\Api\Controllers\HomeController@widget');
 
+Route::get("/login/google",'\App\Api\Controllers\NewAuthController@redirectToGoogle');
 
-});
+Route::get("/login/google/callback",'\App\Api\Controllers\NewAuthController@processGoogleCallback');
+Route::get("/login/facebook/callback",'\App\Api\Controllers\SocialiteController@handleFacebookProviderCallback');
+
 
 
 

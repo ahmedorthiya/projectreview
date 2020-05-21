@@ -81,7 +81,7 @@ const ProductCard = props => {
             item
           >
             {
-              product.connected ? <Button color="secondary" >Connect</Button> : <Button>Disconnect</Button>
+              product.connected ? <Button color="secondary"   onClick={()=>props.openModal(product)}>Connect</Button> : <Button>Disconnect</Button>
             }
           </Grid>
           <Grid

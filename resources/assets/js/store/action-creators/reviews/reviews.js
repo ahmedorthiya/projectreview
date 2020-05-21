@@ -8,6 +8,7 @@ export const getReviewsInfo = ()=>async dispatch=>{
   const resLocations = await axios.get("/api/reviewer-locations/1");
 
 
+
   dispatch({
     type:REVIEWS_INFO,
     payload:{
@@ -28,3 +29,12 @@ export const myReviews = ()=>async dispatch=>{
   })
 
 }
+
+
+export const fetchReviewsFromSource = (src)=>async dispatch=>{
+  const res = await axios.get(src)
+  console.log("response is = ",res);
+}
+
+
+

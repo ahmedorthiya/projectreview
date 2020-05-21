@@ -21,7 +21,7 @@ Route::group(['middleware' => ['auth:api']], function () {
 
 Route::group(['middleware' => 'web'], function () {
 
-    Route::get("/login/google",'\App\Api\Controllers\SocialiteController@googleLogin');
+
     Route::get("/login/facebook",'\App\Api\Controllers\SocialiteController@facebookLogin');
 
 });
@@ -66,5 +66,8 @@ Route::group(['middleware' => ['auth:api']],function (){
 });
 
 
+Route::get("/widget/{widgetToken}",function(){
+    return view("widget");
+});
 
 

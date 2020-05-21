@@ -298,7 +298,7 @@ const SignIn = props => {
                     <Button
 
                       size="large"
-                      href={"/api/login/google"}
+                      href={"/login/google"}
                       variant="contained"
                     >
                       <GoogleIcon className={classes.socialIcon} />

@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import moment from 'moment';
+import FormData from 'form-data'
+
 import { makeStyles } from '@material-ui/styles';
 import {
   Card,
@@ -13,6 +15,8 @@ import {
   Button//,
   //LinearProgress
 } from '@material-ui/core';
+import {useSelector} from "react-redux";
+import axios from "axios";
 
 
 const useStyles = makeStyles(theme => ({
@@ -37,18 +41,34 @@ const useStyles = makeStyles(theme => ({
 
 const AccountProfile = props => {
   const { className, ...rest } = props;
+  const currentUser = props.currentuser;
+  const [avatar,setAvatar] = React.useState("");
 
 
 
   const classes = useStyles();
 
-  const user = {
-    name: 'Shen Zhi',
-    city: 'Los Angeles',
-    country: 'USA',
-    timezone: 'GTM-7',
-    avatar: '/images/avatars/avatar_11.png'
-  };
+  const updateProfile = async (e)=>{
+    e.preventDefault();
+    if(avatar[0] !== "") {
+      const formData = new FormData();
+      Array.from(avatar).forEach(image => {
+        console.log("image is = ",image);
+        formData.append('files', image);
+      });
+     // console.log("form data is = ",formData)
+
+     const data = await axios.post("/api/avatars",formData);
+
+      console.log("data is = ",data);
+
+    }
+  }
+
+
+
+
+
 
   return (
     <Card
@@ -63,14 +83,16 @@ const AccountProfile = props => {
               gutterBottom
               variant="h2"
             >
-              John Doe
+              {
+                currentUser.first_name + "  "+ currentUser.last_name
+              }
             </Typography>
             <Typography
               className={classes.locationText}
               color="textSecondary"
               variant="body1"
             >
-              {user.city}, {user.country}
+              {/*{user.city}, {user.country}*/}
             </Typography>
             <Typography
               className={classes.dateText}
@@ -78,12 +100,12 @@ const AccountProfile = props => {
               component={'span'}
               variant="body1"
             >
-              {moment().format('hh:mm A')} ({user.timezone})
+              {/*{moment().format('hh:mm A')} ({user.timezone})*/}
             </Typography>
           </div>
           <Avatar
             className={classes.avatar}
-            src={user.avatar}
+            src={currentUser.avatar}
           />
         </div>
         {/* <div className={classes.progress}>
@@ -96,14 +118,21 @@ const AccountProfile = props => {
       </CardContent>
       <Divider />
       <CardActions>
+        <form  method="POST" onSubmit={updateProfile} encType="multipart/form-data">
+       <input type={"file"} onChange={e=>setAvatar(e.target.files)} accept="image/x-png,image/gif,image/jpeg"/>
         <Button
           className={classes.uploadButton}
           color="primary"
           variant="text"
+          type={"submit"}
+
+
         >
           Upload picture
         </Button>
-        <Button variant="text">Remove picture</Button>
+        </form>
+
+
       </CardActions>
     </Card>
   );

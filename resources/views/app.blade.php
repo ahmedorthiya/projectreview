@@ -25,7 +25,7 @@
   <div id="app"></div>
 
 
-  @paddle
+
 
 
   @env('prodution')
@@ -41,6 +41,11 @@
 
 
   <script type="text/javascript" src="http://127.0.0.1:8000/widget.js"></script>
+
+  <script src="https://cdn.paddle.com/paddle/paddle.js"></script>
+  <script type="text/javascript">
+      Paddle.Setup({"vendor":114252});
+  </script>
 
 
 

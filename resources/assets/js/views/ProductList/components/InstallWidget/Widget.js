@@ -17,6 +17,7 @@ const useStyles = makeStyles(theme => ({
 
 const Widget = ({text, code}) => {
   const classes = useStyles();
+  console.log(code, text);
 
   return(
     <Container className={classes.root} maxWidth="sm">

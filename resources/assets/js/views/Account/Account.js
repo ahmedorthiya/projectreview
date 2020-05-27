@@ -3,6 +3,7 @@ import { makeStyles, useTheme } from '@material-ui/styles';
 import { Grid, Tab, Tabs, Box, Typography } from '@material-ui/core';
 import SwipeableViews from 'react-swipeable-views';
 import { AccountProfile, AccountDetails, AccountSettings, Feedback } from './components';
+import {useSelector} from "react-redux";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -15,6 +16,7 @@ const useStyles = makeStyles(theme => ({
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
+
 
   return (
     <div
@@ -44,6 +46,10 @@ const Account = () => {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
   const theme = useTheme();
+  const currentUserKey = useSelector(store=>store.session.currentUser);
+  const currentUser = useSelector(store=>store.entities.users[currentUserKey]);
+
+  console.log("current slug is = ",currentUserKey);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -77,17 +83,17 @@ const Account = () => {
         <TabPanel value={value} index={0} dir={theme.direction} >
           <Grid
             container
-            spacing={4}        
+            spacing={4}
           >
-            <Grid          
+            <Grid
               item
               lg={4}
               md={6}
               xl={4}
               xs={12}
             >
-              <AccountProfile />
-          
+              <AccountProfile currentuser={currentUser} />
+
             </Grid>
             <Grid
               item
@@ -96,7 +102,7 @@ const Account = () => {
               xl={8}
               xs={12}
             >
-              <AccountDetails />
+              <AccountDetails currentuser={currentUser} slug={currentUserKey} />
             </Grid>
 
             <Grid
@@ -141,7 +147,7 @@ const Account = () => {
           xs={12}
         >
           <AccountProfile />
-          
+
         </Grid>
         <Grid
           item
@@ -171,7 +177,7 @@ const Account = () => {
         >
           <AccountSettings/>
         </Grid>
-        
+
       </Grid> */}
     </div>
   );

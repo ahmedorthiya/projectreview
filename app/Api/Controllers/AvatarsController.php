@@ -2,8 +2,10 @@
 
 namespace App\Api\Controllers;
 
+use App\Models\User;
 use App\Services\User\Avatar\CreateAvatarService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AvatarsController
 {
@@ -21,13 +23,26 @@ class AvatarsController
 
     public function upload(Request $request)
     {
-        $file = $request->file('avatar');
+        $file = $request->file('files');
+        $image  = $file->store("uploads/profiles");
+       $user = Auth::user();
+       $user->avatar = $image;
+       $user->save();
+       return "Pic updated Successfully";
 
-        return $this->createAvatarService->create($file);
     }
 
-    public function update()
+    public function update(Request $request)
     {
+        //return $request->phone;
+       $user = Auth::user();
+       $user->first_name=$request->firstName;
+       $user->last_name=$request->lastName;
+       $user->email=$request->email;
+       $user->phone_number=$request->phone;
+       $user->country=$request->country;
+       $user->save();
+       return "update record successfully";
     }
 
     public function delete()

@@ -16,7 +16,7 @@ class HomeController
         $widgetToken = "1234234klsdjf";//$user->widget_token;
 
         $widgetCode = '
-        const div = document.createElement("div");
+                    const div = document.createElement("div");
         const iconDiv = document.createElement("div");
         const widgetSideBarDiv = document.createElement("div");
         const flexBox = document.createElement("div");
@@ -30,7 +30,7 @@ class HomeController
 
         const p = document.createElement("p");
 
-        p.textContent="Reviews";
+
 
         const img = document.createElement("img");
         img.setAttribute("src","https://yt3.ggpht.com/a/AATXAJz14ZPzRqz3EJ2VvEdsUahT2Gt77bB9N5Q6gQ=s900-c-k-c0xffffffff-no-rj-mo");
@@ -49,26 +49,127 @@ class HomeController
 
 
 
-         widgetSideBarDiv.style.width="60vw";
-         widgetSideBarDiv.style.height="60vh";
-         widgetSideBarDiv.style.backgroundColor="green";
+         widgetSideBarDiv.style.width="300px";
+         widgetSideBarDiv.style.height="45vh";
+         widgetSideBarDiv.style.backgroundColor="white";
          widgetSideBarDiv.style.overflowY= "scroll";
          widgetSideBarDiv.style.display = "none"
 
-         p.textContent="Widget Side Bar";
-
-         widgetSideBarDiv.append(p);
 
 
 
+         // widgetSidebar top
+
+         const sideBarTop = document.createElement("div");
+         sideBarTop.style.width="100%";
+         sideBarTop.style.height="39px";
+         sideBarTop.style.display="flex";
+         sideBarTop.style.justifyContent="center";
+         sideBarTop.style.alignItems="center";
+         sideBarTop.style.color="white";
+
+         sideBarTop.style.backgroundColor="blue";
+         const pTop = document.createElement("p");
+         pTop.textContent="5 Star reviews";
+         sideBarTop.append(pTop);
+
+
+         // content div
+
+         const sideBarContent = document.createElement("div");
+
+       fetch("http://127.0.0.1:8000/api/widget-reviews").then(resp=>resp.json())
+             .then(res=>{
+
+
+          res.map(item=>{
+
+         const itemDiv = document.createElement("div");
+
+         const profileDiv = document.createElement("div");
+         profileDiv.style.display="flex";
+         const profileImg = document.createElement("img");
+
+         //  =================================   Item div Review User Profile ===================
+
+         profileImg.setAttribute("src",item.picture);
+         profileImg.style.width="50px";
+         profileImg.style.height="50px";
+         profileImg.style.borderRadius="50%";
+
+
+
+         profileDiv.append(profileImg);
+
+
+         const nameP = document.createElement("p");
+//  =================================   Item div Review User Name ===================
+
+         nameP.style.marginLeft="5px";
+         nameP.style.marginTop="15px";
+          nameP.textContent=item.name.first + item.name.last;
+         profileDiv.append(nameP);
+
+
+       const reviewDiv = document.createElement("div");
+         const dateDiv = document.createElement("div");
+
+         const reviewsP = document.createElement("p");
+
+
+         reviewDiv.style.padding="20px";
+
+
+//  =================================   Item div Review Text ===================
+
+         reviewsP.textContent=item.review;
+
+        reviewDiv.append(reviewsP);
+
+         const dateP = document.createElement("p");
+
+
+         //  =================================   Item div Date Text ===================
+         dateP.textContent="Today";
+         dateDiv.append(dateP);
+         dateDiv.style.color="blue";
+
+         itemDiv.append(profileDiv);
+         itemDiv.append(reviewDiv);
+         itemDiv.append(dateDiv);
+
+
+
+
+
+
+
+
+
+
+        itemDiv.style.marginBottom="7px";
+
+
+        sideBarContent.append(itemDiv);
+    })
+
+    });
+
+
+
+
+
+        widgetSideBarDiv.append(sideBarTop);
+        widgetSideBarDiv.append(document.createElement("br"));
+        widgetSideBarDiv.append(sideBarContent);
 
    //         ========================== OnClick Listener ======================
 
 
          iconDiv.onclick=()=>{
-         console.log("listen iconDiv");
+
             if(widgetSideBarDiv.style.display === \'none\'){
-               widgetSideBarDiv.style.display = "flex"
+               widgetSideBarDiv.style.display = "block"
             }else{
                widgetSideBarDiv.style.display = "none"
             }
@@ -91,8 +192,6 @@ class HomeController
         flexBox.style.alignContent="center";
         flexBox.style.alignItems="center";
         div.style.transition="all 2s ease";
-
-
 
  ';
 

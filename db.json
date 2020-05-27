@@ -48,6 +48,77 @@
       "user_id": 1,
       "review": "This tool gives your prospects a visual sense about how much other users love your website, makes your site stand out from the crowd in organic search, and It`s highly recommended for anyone who has an online website for promoting his business. And the implementation of the widget was smooth and super simple"
     }
+  ],
+  "widget-reviews": [
+    {
+      "_id": "5ec964f2014857cd188e4ced",
+      "isActive": false,
+      "picture": "http://placehold.it/32x32",
+      "name": {
+        "first": "Allison",
+        "last": "Burnett"
+      },
+      "review": "Anim occaecat aliquip dolore id et pariatur ullamco ullamco sit. Deserunt est quis veniam id enim esse velit aliquip ipsum ipsum non consequat exercitation. Reprehenderit consequat aliqua consequat dolore Lorem ut sunt veniam elit duis eiusmod ipsum do pariatur."
+    },
+    {
+      "_id": "5ec964f24c0ad588b3607063",
+      "isActive": false,
+      "picture": "http://placehold.it/32x32",
+      "name": {
+        "first": "Lucille",
+        "last": "Lambert"
+      },
+      "review": "Ullamco duis Lorem proident labore reprehenderit veniam amet laborum non pariatur culpa. Velit aliqua culpa aute in in magna sint cillum duis. Aute consequat exercitation exercitation ullamco ea sunt aliquip deserunt et non eiusmod irure quis. Ad ut consectetur cupidatat nostrud ex proident est pariatur. Tempor id do do labore. Officia dolor elit ipsum minim aute. Eiusmod esse eiusmod aliquip ullamco in velit veniam."
+    },
+    {
+      "_id": "5ec964f2aef7fc23d846b98d",
+      "isActive": true,
+      "picture": "http://placehold.it/32x32",
+      "name": {
+        "first": "Vincent",
+        "last": "Brock"
+      },
+      "review": "Irure ut laborum exercitation est excepteur esse cupidatat. Nulla voluptate nostrud dolore eiusmod voluptate fugiat ea dolor incididunt cupidatat enim. Esse ex officia culpa tempor culpa esse amet aliquip aliquip quis magna do exercitation. Duis deserunt pariatur cupidatat ullamco tempor dolore commodo. Eu proident sint nulla ea nisi proident reprehenderit commodo et labore id culpa."
+    },
+    {
+      "_id": "5ec964f2f9739eff5f26bf41",
+      "isActive": true,
+      "picture": "http://placehold.it/32x32",
+      "name": {
+        "first": "Sampson",
+        "last": "Olson"
+      },
+      "review": "Magna minim cupidatat cupidatat enim. Id quis mollit duis nulla minim aliquip dolore nulla in adipisicing. Adipisicing esse magna magna magna amet ut occaecat consectetur esse ad Lorem fugiat deserunt."
+    },
+    {
+      "_id": "5ec964f25d2d885931576960",
+      "isActive": false,
+      "picture": "http://placehold.it/32x32",
+      "name": {
+        "first": "Pugh",
+        "last": "Mosley"
+      },
+      "review": "Labore ullamco dolor Lorem adipisicing do Lorem Lorem laborum deserunt Lorem occaecat tempor ipsum mollit. Culpa ad reprehenderit in labore enim reprehenderit laborum excepteur sit ea elit esse cupidatat. Ex laborum fugiat tempor sunt pariatur ex dolor esse consectetur ex qui adipisicing exercitation dolore. Ex deserunt qui veniam veniam eu fugiat officia ut nulla dolor mollit. Deserunt ullamco pariatur ex pariatur qui eu ut."
+    },
+    {
+      "_id": "5ec964f234677a470dbf93b9",
+      "isActive": true,
+      "picture": "http://placehold.it/32x32",
+      "name": {
+        "first": "Mosley",
+        "last": "Charles"
+      },
+      "review": "Aliquip mollit nisi minim dolor aute incididunt occaecat id. Duis est adipisicing commodo do. Exercitation ex elit nulla pariatur ad eu aliquip. Veniam reprehenderit laboris dolor laboris commodo nulla ea magna. Non aute culpa do nostrud sit officia quis."
+    },
+    {
+      "_id": "5ec964f2fb596594edba7eb2",
+      "isActive": true,
+      "picture": "http://placehold.it/32x32",
+      "name": {
+        "first": "Barton",
+        "last": "Bates"
+      },
+      "review": "Aliqua laborum ad ad culpa reprehenderit tempor culpa nostrud. Amet dolore cillum voluptate ipsum cupidatat eiusmod incididunt occaecat ex id aute. Amet nulla qui exercitation amet ut. Pariatur do nisi excepteur fugiat ex non velit commodo consectetur ad Lorem veniam cupidatat nisi. Excepteur ad commodo commodo dolor velit."
+    }
   ]
-
 }

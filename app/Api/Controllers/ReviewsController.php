@@ -45,4 +45,9 @@ class ReviewsController
        return $res;
    }
 
+   public function widgetReviews(Request $request){
+       $client = new Client();
+       return $client->request("GET","http://localhost:3000/widget-reviews")->getBody();
+   }
+
 }

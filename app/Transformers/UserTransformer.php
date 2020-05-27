@@ -36,6 +36,8 @@ class UserTransformer extends TransformerAbstract
             'account_type'=>$model->account_type,
             'created_at' => $model->created_at,
             'updated_at' => $model->updated_at,
+            'phone_number'=>$model->phone_number,
+            'country'=>$model->country,
         ];
     }
 }

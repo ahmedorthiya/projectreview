@@ -4,7 +4,6 @@ export default [
   {
     id: uuid(),
     title: 'Facebook',
-    slug:'fetch-fb-reviews',
     description:
       'Import and manage all of your Facebook page users recommendations',
     imageUrl: '/images/products/icon-facebook.png',
@@ -13,7 +12,6 @@ export default [
   {
     id: uuid(),
     title: 'Google',
-    slug:'fetch-google-reviews',
     description:
       'Import and manage Google My Business reviews',
     imageUrl: '/images/products/icon-google.png',
@@ -23,7 +21,6 @@ export default [
   {
     id: uuid(),
     title: 'TrustPilot',
-    slug:'fetch-trust-pilot-reviews',
     description:
       'Import and manage all of your Trust Pilot reviews',
     imageUrl: '/images/products/icon-trustpilot.png',

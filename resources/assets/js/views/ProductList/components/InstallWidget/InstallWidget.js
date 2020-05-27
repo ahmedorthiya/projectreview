@@ -1,5 +1,6 @@
 /* eslint-disable react/no-multi-comp */
-import React from 'react';
+import React, {useContext} from 'react';
+import {WidgetContext} from '../../WidgetContext';
 import PropTypes from 'prop-types';
 import SwipeableViews from 'react-swipeable-views';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
@@ -48,6 +49,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const InstallWidget = () => {
+  const myState = useContext(WidgetContext);
+  console.log(myState);
   const classes = useStyles();
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
@@ -66,7 +69,7 @@ const InstallWidget = () => {
     platform_3: '/images/platforms/wordpress.svg',
     platform_4: '/images/platforms/other.svg',
   }
-
+  const {color, position} = myState.state;
   return (
     <div className={classes.root}>
       <Tabs
@@ -89,8 +92,23 @@ const InstallWidget = () => {
         <TabPanel value={value} index={0} dir={theme.direction}>
           <Widget
             text="Copy and paste this JAvascript code snippet into the <body> of the page that you want to display the widget on."
-            code="<!-- start of Async Code --> !function0,i
-                window.rao&&window.console.&&console.error&&console.errorProveSource[],display:functioon()"
+            code={`<script>
+            let widgetDiv = document.createElement('div');
+            widgetDiv.id = 'widget_mw1';
+            let body = document.querySelector("body");
+            body.appendChild(widgetDiv);
+            (function (w,d,s,o,f,js,fjs) {
+                w[o] = w[o] || function () { (w[o].q = w[o].q || []).push(arguments) };
+                js = d.createElement(s), fjs = d.getElementById('widget_'+o);
+                js.id = o; js.src = f; js.async = 1; fjs.parentNode.insertBefore(js, fjs);
+            }(window, document, 'script', 'mw1', './widget.js'));
+    
+     
+            mw1('init', { someConfiguration: 41 });
+            mw1('data', {user: 'users', color:'${color}'});
+           
+    
+        </script>`}
           />
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
@@ -101,9 +119,24 @@ const InstallWidget = () => {
         </TabPanel>
         <TabPanel value={value} index={2} dir={theme.direction}>
           <Widget
-            text="Copy and paste this JS code snippet in the </head> of the page that you want to track or display notifications on."
-            code="<!-- start of Async Code --> !function0,i
-                window.rao&&window.console.&&console.error&&console.errorProveSource[],display:functioon()"
+            text="Copy and paste this JS code snippet in the </body> of the page that you want to track or display notifications on."
+            code={`<script>
+            let widgetDiv = document.createElement('div');
+            widgetDiv.id = 'widget_mw1';
+            let body = document.querySelector("body");
+            body.appendChild(widgetDiv);
+            (function (w,d,s,o,f,js,fjs) {
+                w[o] = w[o] || function () { (w[o].q = w[o].q || []).push(arguments) };
+                js = d.createElement(s), fjs = d.getElementById('widget_'+o);
+                js.id = o; js.src = f; js.async = 1; fjs.parentNode.insertBefore(js, fjs);
+            }(window, document, 'script', 'mw1', './widget.js'));
+    
+     
+            mw1('init', { someConfiguration: 41 });
+            mw1('data', {user: 'users', color:'${color}'});
+           
+    
+        </script>`}
           />
         </TabPanel>
         <TabPanel value={value} index={3} dir={theme.direction}>

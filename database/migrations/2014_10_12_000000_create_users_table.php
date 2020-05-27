@@ -23,6 +23,8 @@ class CreateUsersTable extends Migration
             $table->string("account_type")->default("user");
             $table->string("subscription_id")->default(null);
             $table->string("provider_name")->default("email/password");
+            $table->integer("phone_number")->nullable();
+            $table->string("country")->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

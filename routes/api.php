@@ -16,7 +16,11 @@ Route::group(['middleware' => ['auth:api']], function () {
 
 
 
+
+
 });
+
+
 
 
 Route::group(['middleware' => 'web'], function () {
@@ -62,9 +66,13 @@ Route::group(['middleware' => ['auth:api']],function (){
     Route::get("/total-users","\App\Api\Controllers\UserController@totalUsers");
     Route::patch("/make-admin/{userId}","\App\Api\Controllers\UserController@makeAdmin");
 
+    Route::post("/submit-feedback","\App\Api\Controllers\FeedBackController@newOne");
+
 
 });
 
+
+Route::get("/widget-reviews","\App\Api\Controllers\ReviewsController@widgetReviews");
 
 Route::get("/widget/{widgetToken}",function(){
     return view("widget");

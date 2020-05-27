@@ -1,20 +1,40 @@
-import React from 'react';
+import React, {useContext, useCallback, useEffect} from 'react';
+import {WidgetContext }from '../../WidgetContext';
+import { CirclePicker } from 'react-color';
 import { Paper, Typography, Radio, RadioGroup, FormControlLabel, FormControl, Grid, Checkbox, CardContent, Card, Divider } from '@material-ui/core';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
-import { green } from '@material-ui/core/colors';
+import { blue, yellow, red } from '@material-ui/core/colors';
 import Rating from '@material-ui/lab/Rating';
 
 const GreenRadio = withStyles({
   root: {
-    color: green[400],
+    color: blue[400],
     '&$checked': {
-      color: green[600],
+      color: blue[600],
     },
   },
   checked: {},
 })((props) => <Radio color="default" {...props} />);
 
+const YellowRadio = withStyles({
+  root: {
+    color: yellow[400],
+    '&$checked': {
+      color: yellow[600],
+    },
+  },
+  checked: {},
+})((props) => <Radio color="default" {...props} />);
 
+const RedRadio = withStyles({
+  root: {
+    color: red[400],
+    '&$checked': {
+      color: red[600],
+    },
+  },
+  checked: {},
+})((props) => <Radio color="default" {...props} />);
 const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: theme.palette.background.paper,
@@ -26,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'space-between'
   },
   widget: {
-    maxWidth: 300
+    maxWidth: 550
   },
   spaced : {
     margin: theme.spacing(3),
@@ -37,24 +57,47 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const WidgetSettings = () => {
-
+  const myState = useContext(WidgetContext);
   const classes = useStyles();
-
-  const [selectedValue, setSelectedValue] = React.useState('a');
+  const [bgColor, setBgColor] = React.useState('#edb100')
+  const [selectedValue, setSelectedValue] = React.useState('yellow');
   const [value, setValue] = React.useState('left');
   const [ checked, setChecked ] = React.useState(false);
 
   const handleChecked = () => {
     setChecked(!checked);
   }
+  useEffect(() => {
+    myState.setState(state => {
+      return {
+        ...state,
+        color:selectedValue
+      }
+    })
+  },[selectedValue]);
 
   const handlePositionChange = (event) => {
     setValue(event.target.value);
   };
+  
+  const handleChange = useCallback((color) => {
+    const selectedColor = color.hex;
+    switch(selectedColor) {
+      case '#edb100': setSelectedValue('yellow');
+                      setBgColor(selectedColor);
+        break;
+      case '#ff0000': setSelectedValue('red');
+                      setBgColor(selectedColor);
+        break;
+      case '#005ab6': setSelectedValue('blue');
+                      setBgColor(selectedColor);
+      break;
+      default : setSelectedValue('yellow');
+                setBgColor(selectedColor);
+    }
+  },[setSelectedValue,setBgColor]);
 
-  const handleChange = (event) => {
-    setSelectedValue(event.target.value);
-  };
+  const {color} = myState.state;
 
   return(
     <Paper className={classes.root} >
@@ -67,44 +110,11 @@ const WidgetSettings = () => {
         <br/>
         <Typography gutterBottom variant="body1">Choose background color</Typography>
         <div>
-          <Radio
-            checked={selectedValue === 'a'}
-            inputProps={{ 'aria-label': 'A' }}
-            name="radio-button-demo"
+          <CirclePicker
+            colors={["#005ab6","#edb100","#ff0000"]}
+            color={bgColor}
             onChange={handleChange}
-            value="a"
-          />
-          <Radio
-            checked={selectedValue === 'b'}
-            inputProps={{ 'aria-label': 'B' }}
-            name="radio-button-demo"
-            onChange={handleChange}
-            value="b"
-          />
-          <GreenRadio
-            checked={selectedValue === 'c'}
-            inputProps={{ 'aria-label': 'C' }}
-            name="radio-button-demo"
-            onChange={handleChange}
-            value="c"
-          />
-          <Radio
-            checked={selectedValue === 'd'}
-            color="default"
-            inputProps={{ 'aria-label': 'D' }}
-            name="radio-button-demo"
-            onChange={handleChange}
-            value="d"
-          />
-          <Radio
-            checked={selectedValue === 'e'}
-            color="default"
-            inputProps={{ 'aria-label': 'E' }}
-            name="radio-button-demo"
-            onChange={handleChange}
-            size="small"
-            value="e"
-          />
+           />
         </div>
         <br/>
         <FormControl component="fieldset">
@@ -136,33 +146,46 @@ const WidgetSettings = () => {
       >
         <Typography gutterBottom variant="h4">Preview of the Widget</Typography>
         <br/>
-        <Card className={classes.widget}>
-          <CardContent>
-            <Rating name="read-only" readOnly value={5} />
-            <Typography gutterBottom>5/5 Star Reviews - 1 April, 2020</Typography>
-            <Typography variant="h6" >Someone</Typography>
-            <Typography gutterBottom variant="caption">Review will go here</Typography>
-            <Divider/>
-          </CardContent>
-          <CardContent>
-            <Rating name="read-only" readOnly value={5} />
-            <Typography gutterBottom>5/5 Star Reviews - 1 April, 2020</Typography>
-            <Typography variant="h6" >Someone</Typography>
-            <Typography gutterBottom variant="caption">Review will go here</Typography>
-            <Divider/>
-          </CardContent>
+        {
+          color === 'yellow' &&
+          <Card className={classes.widget}>
           <CardContent>
             <span className={classes.spacer} />
-            <label>
-                Powered by 
-            </label>
             <img
               alt="Logo"
-              src="/images/logos/logo-new-small.png"
-              style={{width: 80}}
+              src="/images/widgets/yellow-widget.png"
+              style={{width: 500}}
             />
           </CardContent>
         </Card>
+        }
+        {
+          color === 'red' &&
+          <Card className={classes.widget}>
+          <CardContent>
+            <span className={classes.spacer} />
+            <img
+              alt="Logo"
+              src="/images/widgets/red-widget.png"
+              style={{width: 500}}
+            />
+          </CardContent>
+        </Card>
+        }
+        {
+          color === 'blue' &&
+          <Card className={classes.widget}>
+          <CardContent>
+            <span className={classes.spacer} />
+            <img
+              alt="Logo"
+              src="/images/widgets/blue-widget.png"
+              style={{width: 500}}
+            />
+          </CardContent>
+        </Card>
+        }
+        
       </Grid>
 
 

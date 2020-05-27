@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
+import axios from "axios";
 import {
   Card,
   CardHeader,
@@ -19,17 +20,32 @@ const useStyles = makeStyles(() => ({
 
 const AccountDetails = props => {
   const { className, ...rest } = props;
+  const currentUser = props.currentuser;
+  const slug = props.slug;
+
 
   const classes = useStyles();
 
   const [values, setValues] = useState({
-    firstName: 'Shen',
-    lastName: 'Zhi',
-    email: 'shen.zhi@devias.io',
-    phone: '',
-    state: 'Alabama',
-    country: 'USA'
+    firstName: currentUser.first_name,
+    lastName: currentUser.last_name,
+    email: currentUser.email,
+    phone: currentUser.phone_number,
+
+    country: currentUser.country
   });
+
+
+  const saveDetails = async ()=>{
+    const {firstName,lastName,email,phone,country} = values;
+
+    await axios.put("/api/avatars",{
+      slug,
+      firstName,lastName,email,phone,country
+    });
+
+
+  }
 
   const handleChange = event => {
     setValues({
@@ -38,20 +54,6 @@ const AccountDetails = props => {
     });
   };
 
-  const states = [
-    {
-      value: 'alabama',
-      label: 'Alabama'
-    },
-    {
-      value: 'new-york',
-      label: 'New York'
-    },
-    {
-      value: 'san-francisco',
-      label: 'San Francisco'
-    }
-  ];
 
   return (
     <Card
@@ -142,28 +144,7 @@ const AccountDetails = props => {
               md={6}
               xs={12}
             >
-              <TextField
-                fullWidth
-                label="Select State"
-                margin="dense"
-                name="state"
-                onChange={handleChange}
-                required
-                select
-                // eslint-disable-next-line react/jsx-sort-props
-                SelectProps={{ native: true }}
-                value={values.state}
-                variant="outlined"
-              >
-                {states.map(option => (
-                  <option
-                    key={option.value}
-                    value={option.value}
-                  >
-                    {option.label}
-                  </option>
-                ))}
-              </TextField>
+
             </Grid>
             <Grid
               item
@@ -188,6 +169,7 @@ const AccountDetails = props => {
           <Button
             color="primary"
             variant="contained"
+            onClick={saveDetails}
           >
             Save details
           </Button>

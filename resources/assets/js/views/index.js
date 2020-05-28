@@ -14,3 +14,5 @@ export {default as AdminPanel} from "./adminPanel";
 export {default as WebUsers} from "./WebUsers";
 export {default as Coupons} from "./coupons";
 export {default as SubscribedUsers} from "./subscribed-users";
+export {default as ReferralLink} from "./ReferralLink";
+export {default as UsersEarning} from "./users-earning";

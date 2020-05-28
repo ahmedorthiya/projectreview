@@ -25,6 +25,7 @@ class CreateUsersTable extends Migration
             $table->string("provider_name")->default("email/password");
             $table->integer("phone_number")->nullable();
             $table->string("country")->nullable();
+            $table->integer("referred_by")->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

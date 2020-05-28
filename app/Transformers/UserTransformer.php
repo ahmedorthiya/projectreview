@@ -38,6 +38,7 @@ class UserTransformer extends TransformerAbstract
             'updated_at' => $model->updated_at,
             'phone_number'=>$model->phone_number,
             'country'=>$model->country,
+            'referred_by'=>$model->referred_by,
         ];
     }
 }

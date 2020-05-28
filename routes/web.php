@@ -19,6 +19,10 @@ Route::get('reset-password/{token}', $spa)->name('password.reset');
 //
 //});
 
+Route::get("/check-user-with-earning",function(){
+    dd(\Illuminate\Support\Facades\Auth::user());
+});
+
 Route::get("/widget.js",'\App\Api\Controllers\HomeController@widget');
 
 Route::get("/login/google",'\App\Api\Controllers\NewAuthController@redirectToGoogle');

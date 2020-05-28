@@ -17,6 +17,8 @@ import {
   NotFound as NotFoundView,
   MyPlan as MyPlanView,
   Logout as LogoutView, AdminPanel, WebUsers, Coupons, SubscribedUsers,
+  ReferralLink as ReferralView,
+  UsersEarning as UsersEarningView,
 } from './views';
 
 import ForgotPasswordView from "./views/ForgotPassword";
@@ -90,6 +92,13 @@ const Routes = props => {
         layout={MainLayout}
         path="/settings"
       />
+      <RouteWithLayout
+        component={ReferralView}
+        exact
+        authRequired
+        layout={MainLayout}
+        path="/referral"
+      />
 
       <RouteWithLayout
         component={AdminPanel}
@@ -127,6 +136,15 @@ const Routes = props => {
         admin
         layout={MainLayout}
         path="/admin-panel/subscribed-users"
+      />
+
+      <RouteWithLayout
+        component={UsersEarningView}
+        exact
+        authRequired
+        admin
+        layout={MainLayout}
+        path="/admin-panel/users-earning"
       />
 
 

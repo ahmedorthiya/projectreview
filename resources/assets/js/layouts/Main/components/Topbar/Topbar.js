@@ -8,6 +8,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import NotificationsIcon from '@material-ui/icons/NotificationsOutlined';
 import InputIcon from '@material-ui/icons/Input';
 import {useSelector} from "react-redux";
+import {Link} from "react-router-dom";
 
 
 const useStyles = makeStyles(theme => ({
@@ -82,13 +83,15 @@ const Topbar = props => {
             </Badge>
           </IconButton>
 
-          {/*<IconButton*/}
-          {/*  className={classes.signOutButton}*/}
-          {/*  color="inherit"*/}
-          {/*  title="Log out"*/}
-          {/*>*/}
-          {/*  <InputIcon />*/}
-          {/*</IconButton>*/}
+          <IconButton
+            className={classes.signOutButton}
+            color="inherit"
+            title="Log out"
+            component={Link}
+            to={"/logout"}
+          >
+            <InputIcon />
+          </IconButton>
 
         </Hidden>
         <Hidden lgUp>

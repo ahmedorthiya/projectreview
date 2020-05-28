@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Balping\HashSlug\HasHashSlug;
+use Illuminate\Support\Facades\Cookie;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -20,6 +21,7 @@ class User extends Authenticatable
         'account_type',
         'phone_number',
         'country',
+        'referred_by',
         'remember_token'
     ];
 
@@ -39,12 +41,22 @@ class User extends Authenticatable
             return $user;
         }
 
+        $referred_by = Cookie::get('referral');
+        $startIndex =  strpos($referred_by,"\"");
+        $endIndex = strpos($referred_by,";");
+        $referred_by_slug = substr($referred_by,$startIndex+1,($endIndex-2)-($startIndex));
+
         return User::create([
             'name'     => $name,
             'email'    => $email,
             'provider' => $provider,
             'provider_id' => $provider_id,
+
             'user_role_id' => UserRole::where('name', 'employee')->pluck('id')->first(),
         ]);
+    }
+
+    public function earningByReferral(){
+        return $this->hasOne(EarningByReferral::class);
     }
 }

@@ -23,6 +23,8 @@ import {withRouter} from "react-router-dom";
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 import ListIcon from '@material-ui/icons/List';
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
+import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
+import AccountBalanceIcon from '@material-ui/icons/AccountBalance';
 
 const useStyles = makeStyles(theme => ({
   drawer: {
@@ -79,10 +81,17 @@ const Sidebar = props => {
       icon: <AttachMoneyIcon />
     },
     {
+      title: 'Users Earning',
+      href: '/admin-panel/users-earning',
+      icon: <AccountBalanceIcon />
+    },
+
+    {
       title: 'Go To Dashboard',
       href: '/dashboard',
       icon: <DashboardIcon />
     },
+
     {
       title: 'Logout',
       href: '/logout',
@@ -116,6 +125,11 @@ const Sidebar = props => {
       title: 'Settings',
       href: '/account',
       icon: <SettingsIcon />
+    },
+    {
+      title: 'Referral',
+      href: '/referral',
+      icon: <MonetizationOnIcon />
     },
     {
       title: 'Logout',

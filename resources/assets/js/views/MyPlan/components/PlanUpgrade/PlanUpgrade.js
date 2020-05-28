@@ -47,7 +47,8 @@ const  PlanUpgrade = (props)=> {
   const {open, handleClose, handleOpen} = props;
   const currentUser = useSelector(store=>store.session.currentUser);
   const entity = useSelector(store=>store.entities);
-  const {email,id}=entity.users[currentUser];
+  const {email,id,referred_by}=entity.users[currentUser];
+
 
 
   const openPaddle = (productId)=>{
@@ -70,18 +71,38 @@ const  PlanUpgrade = (props)=> {
 
 
 
+    if(referred_by !== ""){
+      const referredToPayment = data.checkout.prices.customer.currency + " "+ data.checkout.prices.customer.total;
+      const twentyPercent = data.checkout.prices.customer.total * .2;
+      const referredByEarning = data.checkout.prices.customer.currency + " "+ twentyPercent;
+
+      await axios.post("/api/referred",{
+        referred_to_payment:referredToPayment,
+        referred_to_payment_int:data.checkout.prices.customer.total,
+        referred_by_earning_int:twentyPercent,
+        referred_by_earning:referredByEarning
+      });
+
+
+    }
+
+
+
   }
   const handleUnsuccessfulPayment = async (data)=>{
-    console.log("check = ",{
-      ...data,
-      id,
-      completed:data.checkout.completed})
+
+    console.log("check = ",data.checkout.prices.customer.currency);
 
 
     await axios.post("/api/subscriptions",{
       ...data,
       id,
       completed:data.checkout.completed}).catch(err=>console.log(err));
+
+
+
+
+
   }
   const handleEventCallBack = (evData)=>{
     console.log("ev Data Online = "+evData);

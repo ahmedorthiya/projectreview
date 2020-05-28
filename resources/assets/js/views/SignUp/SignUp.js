@@ -144,6 +144,8 @@ const useStyles = makeStyles(theme => ({
 
 const SignUp = props => {
   const { history } = props;
+  const query = history.location.search;
+
 
   const classes = useStyles();
   const [serverError,setServerError] = useState({
@@ -202,7 +204,7 @@ const SignUp = props => {
 
 
     axios
-      .post('/api/signup', {
+      .post(`/api/signup${query}`, {
         first_name:formState.values.firstName,
         last_name:formState.values.lastName,
         email:formState.values.email,
@@ -210,8 +212,7 @@ const SignUp = props => {
       })
       .then(response => {
         if (response.status === 200) {
-
-          history.push('/')
+           history.push('/')
         }
       })
       .catch(error => {

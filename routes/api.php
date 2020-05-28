@@ -67,6 +67,10 @@ Route::group(['middleware' => ['auth:api']],function (){
     Route::patch("/make-admin/{userId}","\App\Api\Controllers\UserController@makeAdmin");
 
     Route::post("/submit-feedback","\App\Api\Controllers\FeedBackController@newOne");
+    Route::get("/referred-by","\App\Api\Controllers\ReferralController@referredByInfo");
+    Route::post("/referred","\App\Api\Controllers\ReferralController@store");
+    Route::get("/users-earning","\App\Api\Controllers\ReferralController@usersEarning")->middleware("admin");
+    Route::put("/user-paid","\App\Api\Controllers\ReferralController@paid")->middleware("admin");
 
 
 });

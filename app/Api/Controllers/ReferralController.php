@@ -7,6 +7,7 @@ use App\Models\ReferralLink;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use function MongoDB\BSON\toJSON;
 
 class ReferralController
 {
@@ -63,7 +64,7 @@ class ReferralController
     }
 
     public function usersEarning(){
-        $earningUsersList = EarningByReferral::all();
+        $earningUsersList = EarningByReferral::paginate(20);
 
         $records = array();
         foreach ($earningUsersList as $earning){
@@ -78,6 +79,9 @@ class ReferralController
             ));
           $records[] = $data;
         }
+
+        array_push($records,$earningUsersList);
+
 
         return $records;
 

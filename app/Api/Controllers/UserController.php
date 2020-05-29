@@ -82,7 +82,11 @@ class UserController
     }
 
     public function totalUsers(){
-        return User::all();
+        return User::paginate(20);
+    }
+
+    public function totalUsersCount(){
+        return User::all()->count();
     }
 
     public function makeAdmin(){

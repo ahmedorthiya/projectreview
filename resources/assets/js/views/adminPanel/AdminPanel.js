@@ -31,7 +31,7 @@ const AdminPanel = () => {
 
   const loadData = useCallback(async ()=>{
 
-    const totalUserRes = await axios.get("/api/total-users");
+    const totalUserRes = await axios.get("/api/total-users-count");
 
 
 
@@ -54,7 +54,7 @@ const AdminPanel = () => {
 
     setData(data=>({
       ...data,
-      totalUsers: totalUserRes.data.length,
+      totalUsers: totalUserRes.data,
       totalEarning,
 
 

@@ -1,15 +1,15 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import { makeStyles } from '@material-ui/styles';
 
-import { UsersToolbar, UsersTable } from '../UserList/components';
+import { UsersToolbar } from '../UserList/components';
 import EditIcon from '@material-ui/icons/Edit';
 import {useDispatch, useSelector} from "react-redux";
 
 import CustomTable from "../../components/table";
 import Modal from "./Modal";
-import {Card} from "@material-ui/core";
+import {Button} from "@material-ui/core";
 import clsx from "clsx";
-import DeleteIcon from '@material-ui/icons/Delete';
+
 import axios from "axios";
 
 const useStyles = makeStyles(theme => ({
@@ -32,34 +32,57 @@ const WebUsers = props => {
 
   const [userInfos,setList] = useState([]);
   const [selectedUser,setSelectedUser] = useState('');
+  const [webResponse,setWebResponse] = useState("");
+  const [loadMore,setLoadMore] = useState(true);
 
+  const loadMoreUsers = ()=>{
 
-  useEffect(()=>{
-    const allUsers = async ()=>{
-      const res = await axios.get("/api/total-users");
-      const list = [];
-
-      console.log("res data is = ",res.data);
-      res.data.map(row=>{
-        list.push({
-          name:row.first_name,
-          email:row.email,
-          'edit':<EditIcon onClick={()=>handleOpen(row)} style={{cursor:'pointer'}}/>
-
-
-
-        })
-      })
-      setList(list);
-
-
+    if(webResponse.current_page === webResponse.last_page) return setLoadMore(false);
+    else if((webResponse.current_page+1) >= webResponse.last_page){
+     setLoadMore(false);
     }
 
-    allUsers();
+    const nextUrl = webResponse.next_page_url.substr(21,webResponse.next_page_url.length-21);
+
+    loadWebUsers(nextUrl);
+
+  }
+
+  const loadWebUsers = useCallback(async (url)=>{
+    const res = await axios.get(url);
+    const list = [];
+
+
+
+
+    res.data.data.map(row=>{
+      list.push({
+        name:row.first_name,
+        email:row.email,
+        'edit':<EditIcon onClick={()=>handleOpen(row)} style={{cursor:'pointer'}}/>
+
+
+
+      })
+    })
+    setWebResponse(res.data);
+
+   // const oldUserinfos = userInfos.concat(list); // merge two array
+
+    setList(data=>(data.concat(list)));
 
 
 
   },[])
+
+  useEffect(()=>{
+
+
+    loadWebUsers("/api/total-users");
+
+
+
+  },[loadWebUsers])
 
 
 
@@ -76,6 +99,8 @@ const WebUsers = props => {
 
 
   };
+
+
 
 
 
@@ -96,6 +121,11 @@ const WebUsers = props => {
       <br/>
       <CustomTable color={'white'} headings={['Name','Email','Edit']} data={userInfos}/>
     </div>
+      <br/>
+      <div>
+        <Button variant={"contained"} color={"primary"} onClick={loadMoreUsers} disabled={!loadMore}> Load More</Button>
+      </div>
+
     </div>
   );
 };

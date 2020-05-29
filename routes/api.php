@@ -64,6 +64,7 @@ Route::group(['middleware' => ['auth:api']],function (){
     Route::get("/user-reviews/{review}","\App\Api\Controllers\ReviewsController@specificUserReviews");
     Route::post("/subscriptions","\App\Api\Controllers\SubscriptionController@newSubscriptionRecord");
     Route::get("/total-users","\App\Api\Controllers\UserController@totalUsers");
+    Route::get("/total-users-count","\App\Api\Controllers\UserController@totalUsersCount");
     Route::patch("/make-admin/{userId}","\App\Api\Controllers\UserController@makeAdmin");
 
     Route::post("/submit-feedback","\App\Api\Controllers\FeedBackController@newOne");

@@ -1,4 +1,4 @@
-import React, { useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import { makeStyles } from '@material-ui/styles';
 import AccountBalanceIcon from '@material-ui/icons/AccountBalance';
 
@@ -30,6 +30,46 @@ const UsersEarning = props => {
   const [usersList,setList] = useState([]);
   const [msg,setMsg] = useState("");
 
+
+  const [webResponse,setWebResponse] = useState("");
+  const [loadMore,setLoadMore] = useState(true);
+
+  const loadMoreUsers = ()=>{
+
+    if(webResponse.current_page === webResponse.last_page) return setLoadMore(false);
+    else if((webResponse.current_page+1) >= webResponse.last_page){
+      setLoadMore(false);
+    }
+
+    const nextUrl = webResponse.next_page_url.substr(21,webResponse.next_page_url.length-21);
+
+    loadEarningUsers(nextUrl);
+
+  }
+
+  const loadEarningUsers = useCallback(async (url)=>{
+
+    const res = await axios.get(url);
+    const list = [];
+
+    console.log("res data is = ",res.data);
+
+    for(let i =0; i< (res.data.length-1); i++){
+      const jsonData = JSON.parse(res.data[i]);
+      list.push({
+        'name':jsonData.name,
+        'email':jsonData.email,
+        'phone':jsonData.phone,
+        'amount':'$'+jsonData.amount,
+        'payuser':<Button size={"small"} variant={"contained"} onClick={()=>userPaid(jsonData.id)} color={"primary"}>Done payment</Button>
+      });
+    }
+
+    setWebResponse(res.data);
+    setList(data=>data.concat(list));
+
+  },[]);
+
   const userPaid = async (id)=>{
     await axios.put("/api/user-paid",{
       id
@@ -40,30 +80,10 @@ const UsersEarning = props => {
   }
 
   useEffect(()=>{
-    const retrieve = async ()=>{
-
-      const res = await axios.get("/api/users-earning");
-      const list = [];
-     res.data.map(data=>{
-       const jsonData = JSON.parse(data);
-       list.push({
-         'name':jsonData.name,
-         'email':jsonData.email,
-         'phone':jsonData.phone,
-         'amount':'$'+jsonData.amount,
-         'payuser':<Button size={"small"} variant={"contained"} onClick={()=>userPaid(jsonData.id)} color={"primary"}>Done payment</Button>
-       });
-     })
-
-      setList(list);
-
- }
+    loadEarningUsers("/api/users-earning");
 
 
-    retrieve();
-
-
-  },[])
+  },[loadEarningUsers])
 
 
 
@@ -99,6 +119,11 @@ const UsersEarning = props => {
 
 
       </div>
+      <br/>
+      <div>
+        <Button variant={"contained"} color={"primary"} onClick={loadMoreUsers} disabled={!loadMore}> Load More</Button>
+      </div>
+
     </div>
   );
 };

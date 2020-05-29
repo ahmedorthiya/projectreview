@@ -10,14 +10,18 @@ class ReviewsController
 {
    public function generalInfo(Request $request){
 
-       $client = new Client();
-       $res = $client->request('GET', 'http://localhost:3000/overall_reviews_info');
+//       $client = new Client();
+//       $res = $client->request('GET', 'http://localhost:3000/overall_reviews_info');
+//
+//
+//       $result= $res->getBody();
 
+       $json = file_get_contents(base_path("db.json"));
+       $data = json_decode($json,true);
 
-       $result= $res->getBody();
       // return $resLocations;
 
-       return $result;
+       return $data['overall_reviews_info'];
 
        //dd($result);
      //  return $resLocations;
@@ -27,27 +31,30 @@ class ReviewsController
 
    }
    public function locations(Request $request){
-       $client = new Client();
-       $resLocations = $client->request('GET', 'http://localhost:3000/reviews')->getBody();
+       $json = file_get_contents(base_path("db.json"));
+       $data = json_decode($json,true);
 
-       // in actual return only locations and not other data
+       // return $resLocations;
 
-       return $resLocations;
-
+       return $data['reviews'];
    }
 
    public function specificUserReviews(Request $request){
-       $client = new Client();
-       $res = $client->request('GET', 'http://localhost:3000/reviews')->getBody();
+       $json = file_get_contents(base_path("db.json"));
+       $data = json_decode($json,true);
 
+       // return $resLocations;
 
-
-       return $res;
+       return $data['reviews'];
    }
 
    public function widgetReviews(Request $request){
-       $client = new Client();
-       return $client->request("GET","http://localhost:3000/widget-reviews")->getBody();
+       $json = file_get_contents(base_path("db.json"));
+       $data = json_decode($json,true);
+
+       // return $resLocations;
+
+       return $data['widget-reviews'];
    }
 
 }

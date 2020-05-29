@@ -42,7 +42,10 @@ Route::get("/login/facebook/callback",'\App\Api\Controllers\SocialiteController@
 Route::get("/reviews-info/{review}","\App\Api\Controllers\ReviewsController@generalInfo");
 
 Route::get("/user",function(){
-    return \App\Models\User::count();
+    $json = file_get_contents(base_path("db.json"));
+    $data = json_decode($json,true);
+    return $data['overall_reviews_info'];
+
 });
 
 

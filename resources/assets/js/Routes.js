@@ -166,6 +166,15 @@ const Routes = props => {
         path="/sign-in"
       />
       <RouteWithLayout
+        component={SignInView}
+        exact
+        layout={MinimalLayout}
+        path="/login/google/callback"
+      />
+
+
+
+      <RouteWithLayout
         component={ForgotPasswordView}
         exact
         layout={MinimalLayout}

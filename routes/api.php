@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 
 Route::group(['middleware' => ['auth:api']], function () {
     Route::get('/users/me', '\App\Api\Controllers\SessionController@currentUser');
+
     Route::get('/logout', '\App\Api\Controllers\SessionController@logout');
 
     Route::apiResource('/users', '\App\Api\Controllers\UserController');
@@ -23,8 +24,13 @@ Route::group(['middleware' => ['auth:api']], function () {
 
 
 
-Route::group(['middleware' => 'web'], function () {
 
+Route::group(['middleware' => ['web']], function () {
+
+
+
+    Route::get("/login/google",'\App\Api\Controllers\SocialiteController@googleLogin');
+    Route::get("/login/linkedin",'\App\Api\Controllers\SocialiteController@linkedinLogin');
 
     Route::get("/login/facebook",'\App\Api\Controllers\SocialiteController@facebookLogin');
 
@@ -35,9 +41,17 @@ Route::group(['middleware' => ['encryptCookies']], function () {
     Route::post('/signup', '\App\Api\Controllers\UserController@signup');
 
 
-
+    Route::get("/login/google/callback",'\App\Api\Controllers\SocialiteController@handleGoogleProviderCallback');
+    Route::get("/login/linkedin/callback",'\App\Api\Controllers\SocialiteController@handleLinkedInCallback');
 
 });
+
+
+
+Route::get("/googleAccessToken",function (){
+    return Illuminate\Support\Facades\Cookie::get("googleAccessToken");
+});
+
 
 
 
@@ -75,6 +89,9 @@ Route::group(['middleware' => ['auth:api']],function (){
 
 
 });
+
+
+
 
 
 Route::get("/widget-reviews","\App\Api\Controllers\ReviewsController@widgetReviews");

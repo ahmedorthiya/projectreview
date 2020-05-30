@@ -3,11 +3,14 @@
 namespace App\Services\Session;
 
 use App\Contracts\Repository\UserRepositoryContract as UserRepository;
+use App\Models\User;
+use http\Env\Request;
 use Illuminate\Contracts\Routing\ResponseFactory as Response;
 use Illuminate\Contracts\Validation\Factory as Validator;
 use Illuminate\Contracts\Auth\Factory as Auth;
 use Illuminate\Validation\ValidationException;
 use Laravel\Passport\ApiTokenCookieFactory;
+use Illuminate\Support\Facades\Auth as AuthServices;
 
 class LoginService
 {
@@ -58,6 +61,29 @@ class LoginService
         }
     }
 
+    public function attemptSocialLogin($user,$csrfToken,$accessToken){
+
+             AuthServices::login($user);
+
+
+            $apiCookie = $this->cookie->make($user->getKey(), $csrfToken);
+            $response =  $this->response->success(
+                 $this->repository->skipPresenter(false)->currentUser()
+             )->withCookie($apiCookie);
+
+            return $response->cookie( 'googleAccessToken', encrypt( $accessToken ), 525600 );
+
+
+       // return redirect()->back()->with("response",);
+
+    }
+
+    public function socialLogin($user,$csrfToken,$accessToken){
+
+
+        return $this->attemptSocialLogin($user,$csrfToken,$accessToken);
+    }
+
     public function attemptLogin($loginInfo, $csrfToken)
     {
         $validator = $this->validateLoginInfo($loginInfo);
@@ -66,6 +92,14 @@ class LoginService
             throw new ValidationException($validator);
         }
 
+
+
+
+
+      //  $result = User::where(["email","=",$loginInfo['email']],['provider',"=","email/password"])->first;
+       // if($result)
         return $this->auth->attempt($loginInfo);
+
+        //return $result;
     }
 }

@@ -34,6 +34,8 @@ class UserTransformer extends TransformerAbstract
             'email' => $model->email,
             'avatar' => $model->avatar ? $this->fileSystem->url($model->avatar) : null,
             'account_type'=>$model->account_type,
+            'provider_id'=>$model->provider_id,
+            'provider'=>$model->provider,
             'created_at' => $model->created_at,
             'updated_at' => $model->updated_at,
             'phone_number'=>$model->phone_number,

@@ -25,28 +25,18 @@ Route::get("/check-user-with-earning",function(){
 
 Route::get("/widget.js",'\App\Api\Controllers\HomeController@widget');
 
-Route::get("/login/google",'\App\Api\Controllers\NewAuthController@redirectToGoogle');
-
-Route::get("/login/google/callback",'\App\Api\Controllers\NewAuthController@processGoogleCallback');
-Route::get("/login/facebook/callback",'\App\Api\Controllers\SocialiteController@handleFacebookProviderCallback');
 
 
+//Route::get("/login/google",'\App\Api\Controllers\SocialiteController@googleLogin');
+//Route::get("/login/google/callback",'\App\Api\Controllers\SocialiteController@handleGoogleProviderCallback');
 
 
-
-//Route::get("/check/{check}",function (){
-//    dd(request()->check);
-//});
-
+Route::get("/login/linkedin",'\App\Api\Controllers\SocialiteController@linkedinLogin');
+Route::get("/login/linkedin/callback",'\App\Api\Controllers\SocialiteController@handleLinkedInCallback');
 
 Route::get("/reviews-info/{review}","\App\Api\Controllers\ReviewsController@generalInfo");
 
-Route::get("/user",function(){
-    $json = file_get_contents(base_path("db.json"));
-    $data = json_decode($json,true);
-    return $data['overall_reviews_info'];
 
-});
 
 
 

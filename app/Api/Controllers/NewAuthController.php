@@ -6,6 +6,7 @@ namespace App\Api\Controllers;
 
 use App\SocialAccount;
 use App\Models\User;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -18,13 +19,14 @@ use App\Classes\Google_Service_MyBusiness;
 
 class NewAuthController
 {
-    public function redirectToGoogle ()
+    public function googleLogin ()
     {
         $client = new \Google_Client();
         $client->setAccessType('online');
         // $client->setApplicationName('Reputaion All Over');
-        $client->setClientId('810334204223-aee707cvel2eq470rp98q5okk9o84a7r.apps.googleusercontent.com');
-        $client->setClientSecret('Nal6dR1ibWFTT-Q2x20dl6C');
+        //$client->setClientId('810334204223-aee707cvel2eq470rp98q5okk9o84a7r.apps.googleusercontent.com');
+        $client->setClientId('468027039612-4unngsa1ep87rphjjmfjps8fdp612dvk.apps.googleusercontent.com');
+        $client->setClientSecret('AJn9dOWgtavCV_Z2LWYu21Mz');
         $client->setRedirectUri('http://localhost:8000/login/google/callback');
         $client->addScope(['https://www.googleapis.com/auth/business.manage', 'https://www.googleapis.com/auth/plus.business.manage']);
         $client->setDeveloperKey('AIzaSyC6Xm6m-Dw3aja7CI7uPeXT1d8N8yOWn3s');
@@ -52,23 +54,27 @@ class NewAuthController
         }
     }
 
-    public function processGoogleCallback (Request $request)
+    public function handleGoogleProviderCallback (Request $request)
     {
-        // try {
-        //     $socialUser = Socialite::driver('google')->scopes(['https://www.googleapis.com/auth/business.manage', 'https://www.googleapis.com/auth/plus.business.manage'])->user();
-        // } catch (InvalidStateException $exception) {
-        //     return redirect()->route('login')
-        //         ->withErrors([
-        //             'email' => [
-        //                 __('Google Login failed, please try again.'),
-        //             ],
-        //         ]);
-        // }
+//         try {
+//             $socialUser = Socialite::driver('google')->stateless()->user();
+//         } catch (InvalidStateException $exception) {
+//             dd($exception);
+//             return redirect()->route('login')
+//                 ->withErrors([
+//                     'email' => [
+//                         __('Google Login failed, please try again.'),
+//                     ],
+//                 ]);
+//         }
+         //->scopes(['https://www.googleapis.com/auth/business.manage', 'https://www.googleapis.com/auth/plus.business.manage'])
 
         $client = new \Google_Client();
         $client->setAccessType('online'); // default: offline
-        $client->setClientId('810334204223-aee707cvel2eq470rp98q5okk9o84a7r.apps.googleusercontent.com');
-        $client->setClientSecret('Nal6dR1ibWFTT-Q2x20dl6C');
+      //  $client->setClientId('810334204223-aee707cvel2eq470rp98q5okk9o84a7r.apps.googleusercontent.com');
+       // $client->setClientSecret('Nal6dR1ibWFTT-Q2x20dl6C');
+        $client->setClientId('468027039612-4unngsa1ep87rphjjmfjps8fdp612dvk.apps.googleusercontent.com');
+        $client->setClientSecret('AJn9dOWgtavCV_Z2LWYu21Mz');
         $client->setRedirectUri('http://localhost:8000/login/google/callback');
 
 
@@ -106,33 +112,80 @@ class NewAuthController
 
 
 
-        $accountName = $service->accounts->listAccounts()[0];//['name'];
-        dd($service);
-         var_dump($accountName);
 
-        var_dump($service->accounts_locations->listAccountsLocations($accountName)[0]);
 
-        // Get user locations from accounts->listAccounts('accounts/account_id');
-        // Then for choosen location_id fetch reviews from google by $service->accounts_locations_reviews('accounts/account_id/locations/location_id');
+       $accountName = $service->accounts->listAccounts()[0];//['name'];
 
+//        $locationName = 'accounts/111050869667910417441/locations/17405754705905257334/';
+
+//        $sendReq = new Client();
+//        $value=        $sendReq->request('GET', 'https://mybusiness.googleapis.com/v4/accounts/100823404851251882974/locations/17405754705905257334/reviews??access_token='.'ya29.a0AfH6SMB4e3mvsNUmny1IlOB9oS6WrjPifrAwlqAmfOGsyrTLmEUV9BenoNf9gkqf_tH7DRPH0g4G_BwE6mHDPchqSdh4x3T05CqFN4hME14uJbcG3kvMY7T6NXVbn8RaRWIPrhVWdbyVXduuNLV9NBR86hnSE3prPco');
+//        dd($value);
+//        $mybusinessService = new Google_Service_Mybusiness($client);
+//
+//        $reviews = $mybusinessService->accounts_locations_reviews;
+//
+//        do{
+//            $listReviewsResponse = $reviews->listAccountsLocationsReviews($locationName);
+//            dd($listReviewsResponse);
+//
+//            $reviewsList = $listReviewsResponse->getReviews();
+//            foreach ($reviewsList as $index => $review) {
+//
+//                dd($review);
+//                /*Accesing $review Object
+//
+//
+//
+//                * $review->createTime;
+//                * $review->updateTime;
+//                * $review->starRating;
+//                * $review->reviewer->displayName;
+//                * $review->reviewReply->comment;
+//                * $review->getReviewReply()->getComment();
+//                * $review->getReviewReply()->getUpdateTime();
+//                */
+//
+//            }
+//
+//        }while($listReviewsResponse->nextPageToken);
+
+
+
+      // dd( var_dump($accountName));
+
+
+
+
+
+
+         //Get user locations from accounts->listAccounts('accounts/account_id');
+         //Then for choosen location_id fetch reviews from google by $service->accounts_locations_reviews('accounts/account_id/locations/location_id');
+       // $account_id = $service->accounts->listAccounts('accounts/account_id');
+       //  $location_id = $service->accounts_locations_reviews('accounts/account_id/locations/location_id');
+        // dd($account_id." ".$location_id);
         // var_dump($service->accounts_locations_reviews);
-        // $locationsUrl = '/locations';
-        // $locationUrlPart = ['locations'][0]['name'];
+       //  $locationsUrl = '/locations';
+         //$locationUrlPart = ['locations'][0]['name'];
         // $reviewsUrl = '/reviews'
+      //  dd($token);
+       $socialUser =  Socialite::driver('google')->userFromToken($token);
 
+         dd($socialUser);
 
-        $user = \App\User::firstOrCreate(
-            [
-                'email' => $socialUser->getEmail()
-            ],
-            [
-                'name'     => $socialUser->getName(),
-                'password' => Str::random(32),
-            ]
-        );
+//        $user = \App\User::firstOrCreate(
+//            [
+//                'email' => $socialUser->getEmail()
+//            ],
+//            [
+//                'name'     => $socialUser->getName(),
+//                'password' => Str::random(32),
+//            ]
+//        );
+//
+//        $user->widget_token = Hash::make($user->name . $user->id . $user->created_at);
+//        $user->save();
 
-        $user->widget_token = Hash::make($user->name . $user->id . $user->created_at);
-        $user->save();
 
 
         SocialAccount::updateOrCreate(

@@ -21,11 +21,13 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('avatar')->default("uploads/profiles/def.png");
             $table->string("account_type")->default("user");
-            $table->string("subscription_id")->default(null);
-            $table->string("provider_name")->default("email/password");
+
+            $table->string("provider")->default("email/password");
+            $table->string("provider_id")->nullable();
             $table->integer("phone_number")->nullable();
             $table->string("country")->nullable();
             $table->integer("referred_by")->nullable();
+
             $table->rememberToken();
             $table->timestamps();
         });

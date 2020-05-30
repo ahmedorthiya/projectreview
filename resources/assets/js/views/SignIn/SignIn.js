@@ -16,7 +16,8 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { Facebook as FacebookIcon, Google as GoogleIcon } from 'icons';
 import {connect} from "react-redux";
 import {logIn} from "../../store/action-creators/session";
-
+import axios from "axios";
+import LinkedinSDK from 'react-linkedin-sdk'
 
 const schema = {
   email: {
@@ -131,6 +132,8 @@ const useStyles = makeStyles(theme => ({
 const SignIn = props => {
   const { history } = props;
 
+
+
   const classes = useStyles();
 
   const [incorrectCredentials,setIncorrectCredentials] = useState("");
@@ -141,6 +144,28 @@ const SignIn = props => {
     touched: {},
     errors: {}
   });
+
+  const [googleCallBackUrl,setGoogleCallBackUrl] = React.useState("");
+
+
+
+  useEffect(()=>{
+      const loadGoogleResponseData = async ()=>{
+
+           axios.get("/api/login/google/callback" + history.location.search)
+             .then(res=>{
+
+               history.push("/");
+             });
+
+
+      }
+
+  if(history.location.search !== "") {
+    loadGoogleResponseData();
+  }
+
+  },[history.location.search])
 
   useEffect(() => {
     const errors = validate(formState.values, schema);
@@ -204,6 +229,9 @@ const SignIn = props => {
   };
 
 
+  const responseLinkedin = (response)=>{
+    console.log(response)
+  }
 
 
 
@@ -212,6 +240,9 @@ const SignIn = props => {
 
   return (
     <div className={classes.root}>
+
+
+
       <Grid
         className={classes.grid}
         container
@@ -284,7 +315,7 @@ const SignIn = props => {
                   <Grid item>
                     <Button
                       color="secondary"
-                      href={"http://localhost:8000/api/login/facebook"}
+                      href={"/api/login/facebook"}
                       size="large"
                       variant="contained"
                     >
@@ -295,15 +326,18 @@ const SignIn = props => {
                     </Button>
                   </Grid>
                   <Grid item>
+
                     <Button
 
                       size="large"
-                      href={"/login/google"}
+                      href={"/api/login/google"}
                       variant="contained"
                     >
                       <GoogleIcon className={classes.socialIcon} />
                       Login with Google
                     </Button>
+
+
                   </Grid>
                 </Grid>
                 <Typography

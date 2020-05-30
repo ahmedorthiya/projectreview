@@ -37,9 +37,11 @@ return [
 
     'google' => [
         'GOOGLE_ACTIVE'=>true,
-        'client_id' => '810334204223-aee707cvel2eq470rp98q5okk9o84a7r.apps.googleusercontent.com',
-        'client_secret' => 'Nal6dR1ibWFTT-Q2x20dl6C',
-        'redirect' => 'http://localhost:8000/login/google/callback',
+       // 'client_id' => '810334204223-aee707cvel2eq470rp98q5okk9o84a7r.apps.googleusercontent.com',
+        'client_id' => '468027039612-4unngsa1ep87rphjjmfjps8fdp612dvk.apps.googleusercontent.com',
+       // 'client_secret' => 'Nal6dR1ibWFTT-Q2x20dl6C',
+        'client_secret' => 'AJn9dOWgtavCV_Z2LWYu21Mz',
+        'redirect' => 'http://localhost:9000/login/google/callback',
         'proxy'=>true,
 
 
@@ -53,5 +55,12 @@ return [
         'redirect' => "https://localhost:8000/login/facebook/callback",
 
     ],
+
+
+    'linkedin'=>[
+        'client_id'=>'777h58agg5ppi0',
+        'client_secret'=>'rZPxJtLu2hjBrDmQ',
+        'redirect'=>'http://localhost:8000/login/linkedin/callback',
+    ]
 
 ];

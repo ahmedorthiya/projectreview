@@ -165,7 +165,8 @@ return [
         App\Providers\ResponseMacroServiceProvider::class,
         App\Providers\RepositoryServiceProvider::class,
         Scottybo\LaravelGoogleMyBusiness\GoogleMyBusinessServiceProvider::class,
-        PulkitJalan\Google\GoogleServiceProvider::class
+        PulkitJalan\Google\GoogleServiceProvider::class,
+
 
         // App\Providers\BroadcastServiceProvider::class,
 
@@ -220,6 +221,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'GoogleMyBusiness' => Scottybo\LaravelGoogleMyBusiness\GoogleMyBusiness::class,
         'Google' => PulkitJalan\Google\Facades\Google::class,
+
     ],
 
 ];

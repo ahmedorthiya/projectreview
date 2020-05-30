@@ -13,6 +13,7 @@ import {
 } from '@material-ui/core';
 import DoneAllIcon from '@material-ui/icons/DoneAll';
 import LinkOffIcon from '@material-ui/icons/LinkOff';
+import Modal from "../Modal";
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -43,11 +44,22 @@ const ProductCard = props => {
 
   const classes = useStyles();
 
+  const [open,setOpen] = React.useState("");
+
+
+  const handleClose = ()=>{
+    setOpen(false);
+  }
+
   return (
     <Card
       {...rest}
       className={clsx(classes.root, className)}
     >
+
+      <Modal open={open} handleClose={handleClose} product={product}/>
+
+
       <CardContent>
         <div className={classes.imageContainer}>
           <img
@@ -81,7 +93,7 @@ const ProductCard = props => {
             item
           >
             {
-              product.connected ? <Button color="secondary" >Connect</Button> : <Button>Disconnect</Button>
+              product.connected ? <Button color="secondary"  onClick={()=>setOpen(true)} >Connect</Button> : <Button>Disconnect</Button>
             }
           </Grid>
           <Grid

@@ -47,6 +47,12 @@
       Paddle.Setup({"vendor":114252});
   </script>
 
+  <script src="https://apis.google.com/js/api.js" type="text/javascript"></script>
+  <script type="text/javascript">
+      gapi.load('auth2', function() {
+          // Library loaded.
+      });
+  </script>
 
 
 

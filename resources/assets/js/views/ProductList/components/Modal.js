@@ -17,6 +17,7 @@ export default props=>{
    const classes = styles();
    const {product} = props;
    const [value,setValue] = React.useState('');
+   const [locationId,setLocationId] = React.useState("");
    const dispatch  = useDispatch();
 
    const fetchReviews = async ()=>{
@@ -43,8 +44,24 @@ export default props=>{
            </Typography>
            <Divider variant="fullWidth" component="hr" className={classes.line} />
 
+           {/*<Typography variant="subtitle2" gutterBottom>*/}
+           {/*  Enter Your Api Key*/}
+           {/*</Typography>*/}
+
+           {/*<TextField*/}
+           {/*  fullWidth*/}
+           {/*  id="outlined-multiline-static"*/}
+           {/*  margin="normal"*/}
+           {/*  multiline*/}
+           {/*  placeholder="Enter your api key here"*/}
+           {/*  rows={4}*/}
+           {/*  value={value}*/}
+           {/*  onChange={e=>setValue(e.target.value)}*/}
+           {/*  variant="outlined"*/}
+           {/*/>*/}
+
            <Typography variant="subtitle2" gutterBottom>
-             Enter Your Api Key
+             Enter Your Location Id Key
            </Typography>
 
            <TextField
@@ -52,8 +69,8 @@ export default props=>{
              id="outlined-multiline-static"
              margin="normal"
              multiline
-             placeholder="Enter your api key here"
-             rows={4}
+             placeholder="Enter your Business location id here"
+             rows={2}
              value={value}
              onChange={e=>setValue(e.target.value)}
              variant="outlined"

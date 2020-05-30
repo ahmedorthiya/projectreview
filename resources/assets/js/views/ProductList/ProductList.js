@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, {useState, useMemo, useEffect} from 'react';
 import {WidgetContext} from './WidgetContext';
 import { makeStyles, useTheme } from '@material-ui/styles';
 import { Grid, Tab, Tabs, Box, Typography,IconButton, Paper } from '@material-ui/core';
@@ -8,6 +8,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 
 import { ProductsToolbar, ProductCard, InstallWidget, WidgetSettings } from './components';
 import mockData from './data';
+import axios from "axios";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -75,10 +76,26 @@ const ProductList = () => {
 
   const [products] = useState(mockData);
 
+  useEffect(()=>{
+    const demoFetchData = async ()=>{
+      // const res = await axios.get("https://mybusiness.googleapis.com/v4/accounts/111050869667910417441/locations/17405754705905257334/reviews");
+      // console.log("check reviews data = ",res.data);
+
+      const accessTokenRes = await axios.get("/api/googleAccessToken");
+
+     const  xhr = new XMLHttpRequest();
+       xhr.open('GET', 'https://mybusiness.googleapis.com/v4/accounts/100823404851251882974/locations/17405754705905257334/reviews??access_token='+'ya29.a0AfH6SMB4e3mvsNUmny1IlOB9oS6WrjPifrAwlqAmfOGsyrTLmEUV9BenoNf9gkqf_tH7DRPH0g4G_BwE6mHDPchqSdh4x3T05CqFN4hME14uJbcG3kvMY7T6NXVbn8RaRWIPrhVWdbyVXduuNLV9NBR86hnSE3prPco');
+      const res = await xhr.send();
+     console.log("res value is = ",res);
+    }
+    demoFetchData();
+  },[])
+
+
   return (
     <div className={classes.root}>
       <Paper className={classes.spacer}>
-      
+
         <Tabs
           aria-label="full width tabs example"
           className={classes.tabColor}
@@ -88,7 +105,7 @@ const ProductList = () => {
           value={value}
           variant="fullWidth"
         >
-          
+
              <Tab
             label="INTEGRATIONS"
             {...a11yProps(0)}
@@ -101,7 +118,7 @@ const ProductList = () => {
             label="INSTALL WIDGET"
             {...a11yProps(2)}
           />
-        </Tabs> 
+        </Tabs>
       </Paper>
       <WidgetContext.Provider value={providerValue}>
       <SwipeableViews
@@ -159,10 +176,10 @@ const ProductList = () => {
         </TabPanel>
       </SwipeableViews>
     </WidgetContext.Provider>
-      
+
       {/* <InstallWidget />
       <ProductsToolbar />
-      
+
       <div className={classes.content}>
         <Grid
           container

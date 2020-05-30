@@ -7,11 +7,13 @@ use App\Services\Session\LoginService;
 use App\Services\Session\LogoutService;
 use Illuminate\Http\Request;
 
+
 class SessionController
 {
     private $loginService;
     private $logoutService;
     private $userRepo;
+
 
     public function __construct(
         LoginService $loginService,
@@ -25,6 +27,7 @@ class SessionController
 
     public function currentUser()
     {
+
         return $this->userRepo->skipPresenter(false)->currentUser();
     }
 

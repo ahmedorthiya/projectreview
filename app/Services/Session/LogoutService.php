@@ -5,6 +5,7 @@ namespace App\Services\Session;
 use Illuminate\Contracts\Auth\Factory as Auth;
 use Illuminate\Contracts\Cookie\Factory as Cookie;
 use Illuminate\Contracts\Routing\ResponseFactory as Response;
+use Illuminate\Support\Facades\Session;
 
 class LogoutService
 {
@@ -21,6 +22,8 @@ class LogoutService
 
     public function logoutResponse()
     {
+
+
         return $this->response->success(['message' => 'Successfully logged out'])
                           ->withCookie($this->cookie->forget('laravel_token'));
     }

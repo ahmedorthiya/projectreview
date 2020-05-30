@@ -25,11 +25,22 @@ const RouteWithLayout = props => {
 
    const getCurrentUser = async ()=>{
 
+     const linkedIn = await axios.get("/v1/people/~:(recommendations-received)",{
+       headers:{
+         Host: 'api.linkedin.com',
+         Connection: 'Keep-Alive',
+         Authorization: 'Bearer AQWTrm7dJGDkVWu_qEmyfqAG7rhaphmfJA48bfE8CQDbMcuGDjwjW4G37bsVimffDw4qwyzdDqbEw47U-wm2P6uiLso7aTPhKNDRcvXxT2CNpQRovAco7VwLz6fxmxvBYbUVeDojvk_cAuYo-7_bTWgt47C9JRbwPAxGATHFrWzDY7PDZ45GQ7YWsEBvw1TvTu_w_SaCR_ckUinJfbKQ_GS8sll4Y5bkfPXUoNmuRZOydWDwde8WJoOXFBXV4Vqdl-UwhAuBINmFvFq8qcGVtyzrpuokDxWxUOUviVwtzQQaLISJ2sMwoVfMLBOi1Z1-XtvBzlNP54p6RN80hQSIlOzzfSIufQ'
+       }
+     });
+
 
        try {
 
         const res=  await dispatch(getCurrentUserInfo());
 
+
+
+         console.log("linkedIn response = ",linkedIn.data);
 
          setLoading(false);
 

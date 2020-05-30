@@ -4,6 +4,7 @@ export default [
   {
     id: uuid(),
     title: 'Facebook',
+    slug:'facebook',
     description:
       'Import and manage all of your Facebook page users recommendations',
     imageUrl: '/images/products/icon-facebook.png',
@@ -12,6 +13,7 @@ export default [
   {
     id: uuid(),
     title: 'Google',
+    slug:'google',
     description:
       'Import and manage Google My Business reviews',
     imageUrl: '/images/products/icon-google.png',
@@ -21,6 +23,7 @@ export default [
   {
     id: uuid(),
     title: 'TrustPilot',
+    slug:'trustpilot',
     description:
       'Import and manage all of your Trust Pilot reviews',
     imageUrl: '/images/products/icon-trustpilot.png',
@@ -30,6 +33,7 @@ export default [
   {
     id: uuid(),
     title: 'G2',
+    slug:'g2',
     description:
       'Import and manage all of your G2 reviews',
     imageUrl: '/images/products/icon-g2.jpg',
@@ -39,6 +43,7 @@ export default [
   {
     id: uuid(),
     title: 'Yelp',
+    slug:'yelp',
     description:
     'Import and manage all of your Yelp reviews',
     imageUrl: '/images/products/icon-yelp.png',
@@ -48,6 +53,7 @@ export default [
   {
     id: uuid(),
     title: 'Trip Advisor',
+    slug:'trip-advisor',
     description:
     'Import and manage all of your Trip Advisor reviews',
     imageUrl: '/images/products/icon-tripadvisor.png',

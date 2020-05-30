@@ -19,6 +19,8 @@ class User extends Authenticatable
         'password',
         'avatar',
         'account_type',
+        'provider',
+        'provider_id',
         'phone_number',
         'country',
         'referred_by',
@@ -35,24 +37,23 @@ class User extends Authenticatable
         $this->attributes['password'] = $hash->make($password);
     }
 
-    public function findOrCreateUser($email, $name, $provider, $provider_id)
+    public  function findOrCreateUser($email, $name, $provider, $provider_id)
     {
         if ($user = User::where(['email' => $email, 'provider' => $provider, 'provider_id' => $provider_id])->first()) {
             return $user;
         }
 
-        $referred_by = Cookie::get('referral');
-        $startIndex =  strpos($referred_by,"\"");
-        $endIndex = strpos($referred_by,";");
-        $referred_by_slug = substr($referred_by,$startIndex+1,($endIndex-2)-($startIndex));
+
 
         return User::create([
-            'name'     => $name,
+            'first_name' => $name,
+            'last_name'=>"",
             'email'    => $email,
+            'password' => bcrypt("1!y3&SJA1qk*9j"),
             'provider' => $provider,
             'provider_id' => $provider_id,
 
-            'user_role_id' => UserRole::where('name', 'employee')->pluck('id')->first(),
+
         ]);
     }
 

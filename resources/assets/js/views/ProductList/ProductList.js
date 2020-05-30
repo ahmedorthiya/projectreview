@@ -83,9 +83,9 @@ const ProductList = () => {
 
       const accessTokenRes = await axios.get("/api/googleAccessToken");
 
-     const  xhr = new XMLHttpRequest();
-       xhr.open('GET', 'https://mybusiness.googleapis.com/v4/accounts/100823404851251882974/locations/17405754705905257334/reviews??access_token='+'ya29.a0AfH6SMB4e3mvsNUmny1IlOB9oS6WrjPifrAwlqAmfOGsyrTLmEUV9BenoNf9gkqf_tH7DRPH0g4G_BwE6mHDPchqSdh4x3T05CqFN4hME14uJbcG3kvMY7T6NXVbn8RaRWIPrhVWdbyVXduuNLV9NBR86hnSE3prPco');
-      const res = await xhr.send();
+     //const  xhr = new XMLHttpRequest();
+     //  xhr.open('GET', 'https://mybusiness.googleapis.com/v4/accounts/100823404851251882974/locations/17405754705905257334/reviews??access_token='+'ya29.a0AfH6SMB4e3mvsNUmny1IlOB9oS6WrjPifrAwlqAmfOGsyrTLmEUV9BenoNf9gkqf_tH7DRPH0g4G_BwE6mHDPchqSdh4x3T05CqFN4hME14uJbcG3kvMY7T6NXVbn8RaRWIPrhVWdbyVXduuNLV9NBR86hnSE3prPco');
+      //const res = await xhr.send();
      console.log("res value is = ",res);
     }
     demoFetchData();

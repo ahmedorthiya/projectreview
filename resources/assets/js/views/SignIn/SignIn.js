@@ -17,7 +17,7 @@ import { Facebook as FacebookIcon, Google as GoogleIcon } from 'icons';
 import {connect} from "react-redux";
 import {logIn} from "../../store/action-creators/session";
 import axios from "axios";
-import LinkedinSDK from 'react-linkedin-sdk'
+
 
 const schema = {
   email: {

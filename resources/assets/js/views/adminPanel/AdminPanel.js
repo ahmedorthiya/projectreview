@@ -39,8 +39,13 @@ const AdminPanel = () => {
       vendor_id:114252,
       vendor_auth_code:"f7f3fdcdad4a6a174318501b842687fa5447c43c2efd7c5b01",
 
-      state:'active',
-    })
+
+    },{
+      headers: {
+        'Content-Type': 'application/json;charset=UTF-8',
+        "Access-Control-Allow-Origin": "*",
+      }
+    });
 
     let totalEarning = 0;
     if(res.data.response.length > 0){

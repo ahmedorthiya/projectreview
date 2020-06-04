@@ -40,7 +40,7 @@ const RouteWithLayout = props => {
 
 
 
-         console.log("linkedIn response = ",linkedIn.data);
+
 
          setLoading(false);
 

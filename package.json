@@ -70,7 +70,7 @@
     "@material-ui/icons": "^4.2.1",
     "@material-ui/lab": "^4.0.0-alpha.51",
     "@material-ui/styles": "^4.2.1",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "babel-plugin-react-css-modules": "^3.4.2",
     "chart.js": "^2.8.0",
     "clsx": "^1.1.0",
